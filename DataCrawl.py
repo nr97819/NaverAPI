@@ -1,4 +1,8 @@
+from NaverAPI.DataAuth import Authentication
 from datetime import date, datetime # 현재 시각 반환 라이브러리
+import urllib
+import DataAuth
+import DataRefine
 
 date = str(datetime.now())
 date = date[:date.rfind(' ')]
@@ -12,12 +16,7 @@ def GetPeriod():
     return startDate, endDate, timeUnit
 
 def GetKeyword(startDate, endDate, timeUnit):
-    print('[조회할 키워드 2개를 입력해주세요.]')
-    print('1번째 키워드 입력 :')
-    keyWord = "[\"%s\"," % input()
-
-    print('2번째 키워드 입력 :')
-    keyWord += "\"%s\"]" % input()
+    keyWord = '%s\"%s\"]' % ('클라우드', 'cloud')
 
     body = '''{\"startDate\":\"%s\",
                \"endDate\":\"%s\",
@@ -32,3 +31,23 @@ def GetKeyword(startDate, endDate, timeUnit):
 
     return body
 
+url = "https://openapi.naver.com/v1/datalab/search"
+
+startDate, endDate, timeUnit = GetPeriod()
+body = GetKeyword(startDate, endDate, timeUnit)
+
+request = urllib.request.Request(url)
+request = Authentication(request)
+request = Authentication(request)
+
+response = urllib.request.urlopen(request, data=body.encode("utf-8"))
+resCode = response.getcode()
+
+if(resCode==200):
+    response_body = response.read()
+    resultData = (response_body.decode('utf-8'))
+else:
+    print("Error Code:" + resCode)
+
+def getCrawlingResult():
+    return resultData
