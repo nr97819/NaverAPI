@@ -1,18 +1,21 @@
+import DataAuth
+import DataCrawl
 import DataRefine
+import DataVisual
+import urllib.request
 
 def Main():
-    url = "https://openapi.naver.com/v1/datalab/search"
+
+    url = "https://openapi.naver.com/v1/datalab/search" # Crawl Part
 
     # 출력할 연도 입력 받기
-    startDate, endDate, timeUnit = GetPeriod()
-    # 출력할 keyWord 입력 받기
-    body = GetKeyword(startDate, endDate, timeUnit)
+    startDate, endDate, timeUnit = DataCrawl.GetPeriod() # Static Value ...
+    
+    # 출력할 keyWord 입력 받기 <-----------------
+    body = DataCrawl.GetKeyword(startDate, endDate, timeUnit)  # Static Value ...
 
     request = urllib.request.Request(url)
-    request.add_header("X-Naver-Client-Id",clientId)
-    request.add_header("X-Naver-Client-Secret",clientSecret)
-    request.add_header("Content-Type","application/json")
-
+    DataAuth.Authentication(request)
     response = urllib.request.urlopen(request, data=body.encode("utf-8"))
     resCode = response.getcode()
 
@@ -21,10 +24,10 @@ def Main():
         resultData = (response_body.decode('utf-8'))
     else:
         print("Error Code:" + resCode)
+    
+    refinedData = DataRefine.DataRefining(DataCrwal.resultData)
 
-    refinedData = DataRefine.DataRefining(resultData)
-
-    PrintInfo(refinedData)
+    DataVisual.PrintInfo(refinedData)
 
 if __name__ == '__main__':
     Main()
