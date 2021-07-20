@@ -1,3 +1,5 @@
+import json
+
 def DataRefining(resultData):
     refinedData = json.loads(resultData)
     # 경로는 본인 PC에 맞게 설정
