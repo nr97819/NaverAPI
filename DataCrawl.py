@@ -1,8 +1,6 @@
 from DataAuth import Authentication
 from datetime import date, datetime # 현재 시각 반환 라이브러리
 import urllib.request
-import DataAuth
-import DataRefine
 
 date = str(datetime.now())
 date = date[:date.rfind(' ')]
