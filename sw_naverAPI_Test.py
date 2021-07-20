@@ -11,8 +11,8 @@ import matplotlib
 from matplotlib import font_manager
 
 # Naver API
-client_id = "gKjj14gCwEygk42XREsy"
-client_secret = "EDB3_6DXf2"
+clientId = "gKjj14gCwEygk42XREsy"
+clientSecret = "EDB3_6DXf2"
 
 # 한글 폰트 (맑은 고딕 경로)
 fromLocation = r"C:\Windows\Fonts\malgun.ttf"
@@ -39,16 +39,16 @@ def GetPeriod():
 
     return startDate, endDate, timeUnit
 
-def GetKeyword(startDate, endDate, timeUnit):
+def GetkeyWord(startDate, endDate, timeUnit):
     print('[조회할 키워드 2개를 입력해주세요.]')
     print('1번째 키워드 입력 :')
-    keyword = "[\"%s\"," % input()
+    keyWord = "[\"%s\"," % input()
 
     print('2번째 키워드 입력 :')
-    keyword += "\"%s\"]" % input()
+    keyWord += "\"%s\"]" % input()
 
-    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keywordGroups\"
-:[{\"groupName\":\"검색 그룹 1\",\"keywords\":%s}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyword)
+    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keyWordGroups\"
+:[{\"groupName\":\"검색 그룹 1\",\"keyWords\":%s}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
 
     return body
 
@@ -96,12 +96,12 @@ def Main():
 
     # 출력할 연도 입력 받기
     startDate, endDate, timeUnit = GetPeriod()
-    # 출력할 Keyword 입력 받기
-    body = GetKeyword(startDate, endDate, timeUnit)
+    # 출력할 keyWord 입력 받기
+    body = GetkeyWord(startDate, endDate, timeUnit)
 
     request = urllib.request.Request(url)
-    request.add_header("X-Naver-Client-Id",client_id)
-    request.add_header("X-Naver-Client-Secret",client_secret)
+    request.add_header("X-Naver-Client-Id",clientId)
+    request.add_header("X-Naver-Client-Secret",clientSecret)
     request.add_header("Content-Type","application/json")
 
     response = urllib.request.urlopen(request, data=body.encode("utf-8"))
