@@ -16,19 +16,13 @@ def GetPeriod():
     return startDate, endDate, timeUnit
 
 def GetKeyword(startDate, endDate, timeUnit):
-    keyWord = "[\"%s\"," % startDate
-    keyWord += "\"%s\"]" % endDate
+    # keyWord = "[\"%s\"," % startDate
+    # keyWord += "\"%s\"]" % endDate
 
-    body = '''{\"startDate\":\"%s\",
-               \"endDate\":\"%s\",
-               \"timeUnit\":\"%s\",
-               \"keywordGroups\"
-               :[{\"groupName\"
-               :\"검색 그룹 1\",
-                \"keywords\":%s}],
-                \"device\":\"pc\",
-                \"ages\":[\"1\",\"2\"],
-                \"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
+    keyWord = '''["클라우드"]'''
+
+    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keywordGroups\"
+:[{\"groupName\":\"검색 그룹 1\",\"keywords\":%s}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
 
     return body
 
@@ -39,7 +33,6 @@ body = GetKeyword(startDate, endDate, timeUnit)
 
 request = urllib.request.Request(url)
 request = Authentication(request)
-
 response = urllib.request.urlopen(request, data=body.encode("utf-8"))
 resCode = response.getcode()
 

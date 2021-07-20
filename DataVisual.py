@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
+import matplotlib
 
+fromLocation = r"C:\Windows\Fonts\malgun.ttf"
+fontName = font_manager.FontProperties(fname=fromLocation).get_name()
+matplotlib.rc('font', family=fontName)
 
 def PrintInfo(addrData):
     list = []
@@ -8,7 +12,7 @@ def PrintInfo(addrData):
     for i in range(12):
         temp = addrData['results'][0]['data'][int(i)]['ratio']
         list.append(round(temp, 2))
-
+    
     'ro' 'b' 'bs' 'g' # 빨간점, 파랑, 파란네모, 초록
     plt.plot(    [1,2,3,4,5,6,7,8,9,10,11,12], 
                 [list[0],list[1],list[2],list[3],list[4],list[5],list[6],list[7],list[8],list[9],list[10],list[11]],

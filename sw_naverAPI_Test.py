@@ -1,5 +1,6 @@
 # 기본
 from sys import stdout
+# from typing_extensions import Required
 
 # Naver API
 import urllib.request
@@ -105,8 +106,9 @@ def Main():
     request.add_header("X-Naver-Client-Id",clientId)
     request.add_header("X-Naver-Client-Secret",clientSecret)
     request.add_header("Content-Type","application/json")
-
+    
     response = urllib.request.urlopen(request, data=body.encode("utf-8"))
+    
     resCode = response.getcode()
 
     if(resCode==200):
