@@ -106,7 +106,7 @@ def Main():
     request.add_header("X-Naver-Client-Id",clientId)
     request.add_header("X-Naver-Client-Secret",clientSecret)
     request.add_header("Content-Type","application/json")
-    
+
     response = urllib.request.urlopen(request, data=body.encode("utf-8"))
     
     resCode = response.getcode()
@@ -118,7 +118,7 @@ def Main():
         print("Error Code:" + resCode)
 
     refinedData = DataRefining(resultData)
-
+    print(refinedData)
     PrintInfo(refinedData)
 
 if __name__ == '__main__':

@@ -7,9 +7,8 @@ def Gradient(ratio):
 
 def Main():    
     # 출력할 keyWord 입력 받기 <-----------------   
-    refinedData = DataRefine.DataRefining(DataCrawl.getCrawlingResult())
+    refinedData = DataRefine.DataRefining(DataCrawl.GetCrawlingResult())
     DataVisual.PrintInfo(refinedData)
-
 
 if __name__ == '__main__':
     Main()
