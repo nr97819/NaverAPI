@@ -1,6 +1,6 @@
-from NaverAPI.DataAuth import Authentication
+from DataAuth import Authentication
 from datetime import date, datetime # 현재 시각 반환 라이브러리
-import urllib
+import urllib.request
 import DataAuth
 import DataRefine
 
@@ -16,7 +16,8 @@ def GetPeriod():
     return startDate, endDate, timeUnit
 
 def GetKeyword(startDate, endDate, timeUnit):
-    keyWord = '%s\"%s\"]' % ('클라우드', 'cloud')
+    keyWord = "[\"%s\"," % startDate
+    keyWord += "\"%s\"]" % endDate
 
     body = '''{\"startDate\":\"%s\",
                \"endDate\":\"%s\",
@@ -38,7 +39,6 @@ body = GetKeyword(startDate, endDate, timeUnit)
 
 request = urllib.request.Request(url)
 request = Authentication(request)
-request = Authentication(request)
 
 response = urllib.request.urlopen(request, data=body.encode("utf-8"))
 resCode = response.getcode()
@@ -51,3 +51,5 @@ else:
 
 def getCrawlingResult():
     return resultData
+
+temp = resultData
