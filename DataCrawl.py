@@ -6,6 +6,7 @@ import DataRefine
 
 date = str(datetime.now())
 date = date[:date.rfind(' ')]
+resultData = 'default'
 
 # 기간 수정 예정
 def GetPeriod():
@@ -44,5 +45,3 @@ else:
 
 def GetCrawlingResult():
     return resultData
-
-temp = resultData
