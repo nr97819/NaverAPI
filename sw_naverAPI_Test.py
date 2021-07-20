@@ -39,7 +39,7 @@ def GetPeriod():
 
     return startDate, endDate, timeUnit
 
-def GetkeyWord(startDate, endDate, timeUnit):
+def GetKeyword(startDate, endDate, timeUnit):
     print('[조회할 키워드 2개를 입력해주세요.]')
     print('1번째 키워드 입력 :')
     keyWord = "[\"%s\"," % input()
@@ -47,8 +47,8 @@ def GetkeyWord(startDate, endDate, timeUnit):
     print('2번째 키워드 입력 :')
     keyWord += "\"%s\"]" % input()
 
-    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keyWordGroups\"
-:[{\"groupName\":\"검색 그룹 1\",\"keyWords\":%s}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
+    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keywordGroups\"
+:[{\"groupName\":\"검색 그룹 1\",\"keywords\":%s}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
 
     return body
 
@@ -83,7 +83,8 @@ def PrintInfo(addrData):
 
 def DataRefining(resultData):
     refinedData = json.loads(resultData)
-    with open('Practice_On My_Own//search_naver_data.json', 'w', encoding='utf-8') as filedata:
+    # with open('Practice_On My_Own//search_naver_data.json', 'w', encoding='utf-8') as filedata:
+    with open('C:/NaverAPI/NaverAPI/search_naver_data.json', 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
                             sort_keys=False, # 오히려 섞임
@@ -97,7 +98,7 @@ def Main():
     # 출력할 연도 입력 받기
     startDate, endDate, timeUnit = GetPeriod()
     # 출력할 keyWord 입력 받기
-    body = GetkeyWord(startDate, endDate, timeUnit)
+    body = GetKeyword(startDate, endDate, timeUnit)
 
     request = urllib.request.Request(url)
     request.add_header("X-Naver-Client-Id",clientId)
@@ -105,20 +106,17 @@ def Main():
     request.add_header("Content-Type","application/json")
 
     response = urllib.request.urlopen(request, data=body.encode("utf-8"))
-    rescode = response.getcode()
+    resCode = response.getcode()
 
-    if(rescode==200):
+    if(resCode==200):
         response_body = response.read()
         resultData = (response_body.decode('utf-8'))
     else:
-        print("Error Code:" + rescode)
+        print("Error Code:" + resCode)
 
     refinedData = DataRefining(resultData)
 
     PrintInfo(refinedData)
-
-def test():
-    pass
 
 if __name__ == '__main__':
     Main()
