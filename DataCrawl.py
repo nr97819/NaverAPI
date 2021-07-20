@@ -7,22 +7,22 @@ import DataRefine
 date = str(datetime.now())
 date = date[:date.rfind(' ')]
 
-# 기간 수정 예정
 def GetPeriod():
-    startDate = "2016-01-01"
+    startDate = "2016-01-01" # 네이버 API 검색 가능일
     endDate = date # 금일
     timeUnit = "week" # 고정
 
     return startDate, endDate, timeUnit
 
 def GetKeyword(startDate, endDate, timeUnit):
-    # keyWord = "[\"%s\"," % startDate
-    # keyWord += "\"%s\"]" % endDate
 
-    keyWord = '''["클라우드"]'''
+    keyWord1 = '["클라우드"]'
+    keyWord2 = '["클라우드 보안"]'
 
-    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keywordGroups\"
-:[{\"groupName\":\"검색 그룹 1\",\"keywords\":%s}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
+    body = '''{\"startDate\":\"%s\",\"endDate\":\"%s\",\"timeUnit\":\"%s\",\"keywordGroups\":[
+                {\"groupName\":\"그룹 1\",\"keywords\":%s}, 
+                {\"groupName\":\"그룹 2\",\"keywords\":%s}
+                ]}''' % (startDate, endDate, timeUnit, keyWord1, keyWord2)
 
     return body
 
