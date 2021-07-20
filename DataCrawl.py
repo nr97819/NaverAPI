@@ -42,7 +42,7 @@ if(resCode==200):
 else:
     print("Error Code:" + resCode)
 
-def getCrawlingResult():
+def GetCrawlingResult():
     return resultData
 
 temp = resultData
