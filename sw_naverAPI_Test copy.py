@@ -10,9 +10,11 @@ import matplotlib.pyplot as plt
 import matplotlib
 from matplotlib import font_manager
 
+'''
 # Naver API
 clientId = "gKjj14gCwEygk42XREsy"
 clientSecret = "EDB3_6DXf2"
+'''
 
 # 한글 폰트 (맑은 고딕 경로)
 fromLocation = r"C:\Windows\Fonts\malgun.ttf"
