@@ -83,8 +83,9 @@ def PrintInfo(addrData):
 
 def DataRefining(resultData):
     refinedData = json.loads(resultData)
-    # with open('Practice_On My_Own//search_naver_data.json', 'w', encoding='utf-8') as filedata:
-    with open('C:/NaverAPI/NaverAPI/search_naver_data.json', 'w', encoding='utf-8') as filedata:
+    # 경로는 본인 PC에 맞게 설정
+    writePath = r'C:/NaverAPI/NaverAPI/search_naver_data.json'
+    with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
                             sort_keys=False, # 오히려 섞임
