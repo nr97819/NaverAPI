@@ -6,6 +6,7 @@ import DataRefine
 
 date = str(datetime.now())
 date = date[:date.rfind(' ')]
+resultData = 'default'
 
 def GetPeriod():
     startDate = "2016-01-01" # 네이버 API 검색 가능일
@@ -44,5 +45,3 @@ else:
 
 def GetCrawlingResult():
     return resultData
-
-temp = resultData
