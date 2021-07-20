@@ -1,27 +1,13 @@
-# 기본
-from sys import stdout
+from datetime import date, datetime # 현재 시각 반환 라이브러리
 
-# Naver API
-import urllib.request
-import json
+date = str(datetime.now())
+date = date[:date.rfind(' ')]
 
 # 기간 수정 예정
 def GetPeriod():
-    # print('시작 입력(YYMMDD) :')
-    # print('검색할 년도 입력 :(YY)')
-    # inputText = input()
-    # startDate = "20%s-%s-%s" % (inputText[0:2], inputText[2:4], inputText[4:])
-    startDate = "2016-01-01" % inputText
-    # startDate = "20%s-%s-%s" % (inputText[0], inputText[1], inputText[2])
-    # YY-MM-DD
-
-    # print('종료일 입력(YYMMDD) :')
-    # inputText = input()
-    # endDate = "20%s-12-31" % (inputText[0:2], inputText[2:4], inputText[4:])
-    # endDate = "20%s-12-31" % inputText
-    endDate = ""
-
-    timeUnit = "month" # 고정
+    startDate = "2016-01-01"
+    endDate = date # 금일
+    timeUnit = "week" # 고정
 
     return startDate, endDate, timeUnit
 
@@ -45,3 +31,4 @@ def GetKeyword(startDate, endDate, timeUnit):
                 \"gender\":\"f\"}''' % (startDate, endDate, timeUnit, keyWord)
 
     return body
+
