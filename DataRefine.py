@@ -12,8 +12,10 @@ def DataRefining(resultData):
 
     refinedResult = json.loads(resultData)
     refinedLen = len(refinedResult['results'][0]['data'])
+    refinedKeyWord = refinedResult['results'][0]['keywords'][0]
 
     refinedData.append({'len':refinedLen,
+                        'keyword':refinedKeyWord,
                         'data':[]
     })
 
@@ -25,9 +27,8 @@ def DataRefining(resultData):
                             'ratio' : refinedRatio
         })
 
-
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:/NaverAPI/NaverAPI/search_naver_data.json'
+    writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
