@@ -28,7 +28,7 @@ def DataRefining(resultData):
         })
 
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
+    writePath = r'C:\LAB\NAVERAPI\naver_datalab_serch_%s.json' % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
