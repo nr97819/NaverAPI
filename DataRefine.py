@@ -1,3 +1,5 @@
+from collections import defaultdict
+import re
 import json
 
 # Summary:
@@ -28,7 +30,7 @@ def DataRefining(resultData):
         })
 
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:\LAB\NAVERAPI\naver_datalab_serch_%s.json' % refinedKeyWord
+    writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -36,3 +38,36 @@ def DataRefining(resultData):
                             ensure_ascii=False )
         filedata.write(rJson)
     return refinedData
+
+def tokenize(message):
+    message = message.lower()
+    all_words = re.findall("[가-힣a-z0-9]+", message)
+    return set(all_words)
+
+def count_words(data):
+    counts = defaultdict(lambda: 0)
+    for message in data:
+        for i in range(len(message)):
+            for word in tokenize(message[i]):
+                counts[word] += 1
+    return counts
+
+def DataRefining2(data):
+    resultData = []
+    for i in range(len(data)):
+        subData = []
+        subData.append(data[i]['title'])
+        subData.append(data[i]['contents'])
+        resultData.append(subData)
+
+    resultWordData = count_words(resultData)
+
+    # 경로는 본인 PC에 맞게 설정
+    writePath = r'C:\NaverAPI\NaverAPI\naver_crawl_word.json'
+    with open(writePath, 'w', encoding='utf-8') as filedata:
+        rJson = json.dumps( resultWordData, 
+                            indent=4,
+                            sort_keys=False,
+                            ensure_ascii=False )
+        filedata.write(rJson)
+    return resultData
