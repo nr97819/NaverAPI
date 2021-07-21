@@ -9,14 +9,12 @@ date = date[:date.rfind(' ')]
 url = "https://openapi.naver.com/v1/datalab/search"
 
 keyWord = []
-keyWord1 = '[\"클라우드\", \"cloud\"]'
-keyWord2 = '[\"클라우드 보안\", \"cloud security\"]'
 
 def SetKeyWord(text):
-    split1, split2 = text.split(',')
+    split1, split2 = text
     temp = '[\"%s\", \"%s\"]' % (split1, split2)
-    global keyWord1
-    keyWord1 = temp
+    global keyWord
+    keyWord = temp
     # return text
 
 def GetPeriod():
@@ -49,7 +47,7 @@ def GetHttpResponse(keyWord):
 
 'GetCrawlingResult()의 #만 지우면 목표결과 완성!'
 def GetCrawlingResult():
-    return GetHttpResponse(keyWord1)#, GetHttpResponse(keyWord2) # 각각의 JSON 파일
+    return GetHttpResponse(keyWord)#, GetHttpResponse(keyWord2) # 각각의 JSON 파일
 
 # inputValue = input('첫번째 키워드 2개를 입력해주세요!\n예시) 오징어,땅콩\n')
 # keyWord1 = SetKeyWord(inputValue)
