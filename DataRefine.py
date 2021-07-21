@@ -42,21 +42,18 @@ def DataRefining(resultData):
 def tokenize(message):
     message = message.lower()
     all_words = re.findall("[가-힣a-z0-9]+", message)
-    return set(all_words)
+    return all_words
 
 def count_words(data):
     counts = defaultdict(lambda: 0)
     for message in data:
         for word in tokenize(message):
-            counts[word] += 1
+            counts[word] = counts[word] + 1
     return counts
 
 def DataRefining2(data):
     resultData = []
     for i in range(len(data)):
-        # subData = []
-        # subData.append(data[i]['title'])
-        # subData.append(data[i]['contents'])
         resultData.append(data[i]['title']+' '+data[i]['contents'])
 
     resultWordData = count_words(resultData)
