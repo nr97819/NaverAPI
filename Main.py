@@ -8,12 +8,10 @@ def Gradient(ratio):
 def Main():    
     # 출력할 keyWord 입력 받기 <-----------------  
     refinedData = list()
-    DataCrawl.SetKeyWord(input('검색어 입력\n').split(','))
-    refinedData1 = DataRefine.DataRefining(DataCrawl.GetCrawlingResult())
-    DataCrawl.SetKeyWord(input('검색어 입력\n').split(','))
-    refinedData2 = DataRefine.DataRefining(DataCrawl.GetCrawlingResult())
-    DataVisual.PrintInfo(refinedData1)
-    DataVisual.PrintInfo(refinedData2)
+    for i in range(2):
+        DataCrawl.SetKeyWord(input('검색어 입력\n').split(','))
+        refinedData.append(DataRefine.DataRefining(DataCrawl.GetCrawlingResult()))
+    DataVisual.PrintInfo(refinedData)
 
 if __name__ == '__main__':
     Main()
