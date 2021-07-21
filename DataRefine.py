@@ -47,18 +47,17 @@ def tokenize(message):
 def count_words(data):
     counts = defaultdict(lambda: 0)
     for message in data:
-        for i in range(len(message)):
-            for word in tokenize(message[i]):
-                counts[word] += 1
+        for word in tokenize(message):
+            counts[word] += 1
     return counts
 
 def DataRefining2(data):
     resultData = []
     for i in range(len(data)):
-        subData = []
-        subData.append(data[i]['title'])
-        subData.append(data[i]['contents'])
-        resultData.append(subData)
+        # subData = []
+        # subData.append(data[i]['title'])
+        # subData.append(data[i]['contents'])
+        resultData.append(data[i]['title']+' '+data[i]['contents'])
 
     resultWordData = count_words(resultData)
 
@@ -70,4 +69,4 @@ def DataRefining2(data):
                             sort_keys=False,
                             ensure_ascii=False )
         filedata.write(rJson)
-    return resultData
+    return resultWordData
