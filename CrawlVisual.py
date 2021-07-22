@@ -11,7 +11,7 @@ def WordData(resultWordData):
 
     image= np.array(pilimg.open(r'C:\LAB\NaverAPI\c.png'))
     
-    wc = WordCloud(max_font_size=200,     
+    wc = WordCloud(max_font_size=180,     
                     min_font_size=10,     
                     font_path='C:\\Windows\\Fonts\\HMKMAMI.ttf',
                     background_color='black', 
