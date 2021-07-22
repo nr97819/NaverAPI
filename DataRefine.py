@@ -1,7 +1,7 @@
 from collections import defaultdict
 import re
 import json
-
+import CrawlVisual         #########################3
 # Summary:
 # 통합 검색어 트렌드 데이터 정제, 김민지
 # param:
@@ -30,7 +30,7 @@ def DataRefining(resultData):
         })
 
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
+    writePath = r'C:\LAB\NAVERAPI\naver_datalab_serch_%s.json' % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -39,16 +39,41 @@ def DataRefining(resultData):
         filedata.write(rJson)
     return refinedData
 
-def tokenize(message):
+def Tokenize(message):
+    with open(r'C:\LAB\NAVERAPI\stopWords.txt', 'rt',  encoding='UTF8') as file:
+        stopWords = file.read()
+    stopWords = stopWords.split('\n')
+    
     message = message.lower()
-    all_words = re.findall("[가-힣a-z0-9]+", message)
-    return all_words
 
-def count_words(data):
+    if '멀티 클라우드' in message:
+        message = message.replace('멀티 클라우드', '멀티클라우드')
+    if '퍼블릭 클라우드' in message:
+        message = message.replace('퍼블릭 클라우드', '퍼블릭클라우드')
+
+    allWords = re.findall("[가-힣a-z0-9]+", message)
+
+    for word in allWords:
+        for i in stopWords:
+            if i in word:
+                resultWord = word.replace(i, '')
+                allWords[allWords.index(word)] = resultWord
+                break
+
+    return allWords
+
+def CountWords(data):
     counts = defaultdict(lambda: 0)
+
     for message in data:
-        for word in tokenize(message):
+        for word in Tokenize(message):
             counts[word] = counts[word] + 1
+
+    if '클라우드' in counts:
+        counts.pop('클라우드')
+    if 'cloud' in counts:
+        counts.pop('cloud')
+
     return counts
 
 def DataRefining2(data):
@@ -56,10 +81,10 @@ def DataRefining2(data):
     for i in range(len(data)):
         resultData.append(data[i]['title']+' '+data[i]['contents'])
 
-    resultWordData = count_words(resultData)
-
+    resultWordData = CountWords(resultData)
+    CrawlVisual.WordData(resultWordData)     
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:\NaverAPI\NaverAPI\naver_crawl_word.json'
+    writePath = r'C:\LAB\NAVERAPI\naver_crawl_word.json'
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( resultWordData, 
                             indent=4,
