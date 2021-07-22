@@ -1,6 +1,7 @@
 from collections import defaultdict
 import re
 import json
+import os
 import CrawlVisual         #########################3
 # Summary:
 # 통합 검색어 트렌드 데이터 정제, 김민지
@@ -8,6 +9,7 @@ import CrawlVisual         #########################3
 # resultData - 정제할 데이터
 # returns:
 # refinedData - 정제된 데이터
+
 def DataRefining(resultData):
     refinedData = []
     refinedLen = 0
@@ -30,11 +32,7 @@ def DataRefining(resultData):
         })
 
     # 경로는 본인 PC에 맞게 설정
-<<<<<<< HEAD
-    writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
-=======
-    writePath = r'C:\NaverAPI\NAVERAPI\naver_datalab_serch_%s.json' % refinedKeyWord
->>>>>>> 82981c13d6a74b7b31dcb75765972e8b5e04cda6
+    writePath = os.getcwd() + "\\NaverAPI\\naver_datalab_serch_%s.json" % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -44,11 +42,7 @@ def DataRefining(resultData):
     return refinedData
 
 def Tokenize(message):
-<<<<<<< HEAD
-    with open(r'C:\NaverAPI\NaverAPI\stopWords.txt', 'rt',  encoding='UTF8') as file:
-=======
-    with open(r'C:\NaverAPI\NAVERAPI\stopWords.txt', 'rt',  encoding='UTF8') as file:
->>>>>>> 82981c13d6a74b7b31dcb75765972e8b5e04cda6
+    with open(os.getcwd() + "\\NaverAPI\\stopWords.txt", 'rt',  encoding='UTF8') as file:
         stopWords = file.read()
     stopWords = stopWords.split('\n')
     
@@ -100,11 +94,7 @@ def DataRefining2(data):
     resultWordData = CountWords(resultData)
     CrawlVisual.WordData(resultWordData)     
     # 경로는 본인 PC에 맞게 설정
-<<<<<<< HEAD
-    writePath = r'C:\NaverAPI\NaverAPI\naver_crawl_word.json'
-=======
-    writePath = r'C:\NaverAPI\NAVERAPI\naver_crawl_word.json'
->>>>>>> 82981c13d6a74b7b31dcb75765972e8b5e04cda6
+    writePath = os.getcwd() + "\\NaverAPI\\naver_crawl_word.json"
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( resultWordData, 
                             indent=4,

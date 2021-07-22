@@ -5,6 +5,7 @@ from requests.api import request
 import re # 정규식용
 import time # 시간 측정용
 from pandas import DataFrame # Excel 출력용
+import os # 파일 경로 지정용
 
 # 오늘 날짜 값 정제
 date = str(datetime.now())
@@ -12,23 +13,22 @@ date = date[:date.rfind(' ')]
 
 url = 'https://search.naver.com/search.naver'
 
+# maxNewsNum = 0
 requestUrl = ''
-maxNewsNum = 0
 pages = None
 query = ''
 
-def InitVariables():
+def InitVariables(startDate, endDate): # default : 100개
 
-    global maxNewsNum, requestUrl, pages, query # 전역 변수 사용 선언
+    global requestUrl, pages, query # 전역 변수 사용 선언
 
     # query = input('검색 키워드를 입력 : ')
     query = query.replace(' ', '+') # 네이버 판정
     query = query.replace(',', '+')
 
-    maxNewsNum = int(input('필요한 뉴스 기사 개수 : '))
-
-    startDate = input('검색 시작일 : (YYYYMMDD)\n') # 20210721
-    endDate = input('검색 종료일 : (YYYYMMDD)\n')
+    # maxNewsNum = int(input('필요한 뉴스 기사 개수 : '))
+    # startDate = input('검색 시작일 : (YYYYMMDD)\n') # 20210721
+    # endDate = input('검색 종료일 : (YYYYMMDD)\n')
 
     requestUrl = url
     requestUrl += '?sm=tab_hty.top&where=news'
@@ -42,7 +42,7 @@ def InitVariables():
     soup = BeautifulSoup(req.text, 'html.parser')
     pages = soup.find('div', {'class' : 'sc_page_inner'})
 
-def CrawlingByTime():
+def CrawlingByTime(maxNewsNum):
     # 전역 변수로 url 받기
     url = requestUrl
 
@@ -117,9 +117,10 @@ def CrawlingByTime():
     
     return newsResultDict, totalTime
 
-def GetNewsCrawlingData():
-    InitVariables()
-    newsResultDict, totalTime = CrawlingByTime()
+def GetNewsCrawlingData(sampleList, maxNewsNum=100):
+    startDate, endDate = sampleList.split('-')
+    InitVariables(startDate, endDate)
+    newsResultDict, totalTime = CrawlingByTime(maxNewsNum)
     print('크롤링 완료')
 
     ' @ Terminal 결과 출력 - 임시 비활성화'
@@ -129,17 +130,20 @@ def GetNewsCrawlingData():
 
     return newsResultDict
 
-def printExcelResult(data):
+def printExcelResult(data, fileNumber):
     dateFrame = DataFrame(data).T
-    fileName = '%s의_결과[%s].xlsx' % (query, date)
+    filePath = os.getcwd() + r'\\NaverAPI\\'
+    fileName = filePath + '%s의_결과_%s_%s.xlsx' % (query, fileNumber, date)
     dateFrame.to_excel(fileName)
     print('Excel 출력 완료!')
 
-def GetExcelResultQuery(data):
-    print('\n','-'*32,'\n','- Excel 결과물 출력 여부 [Y/N] -','\n','-'*32,'\n')
-    userInput = input()
+def GetExcelResultQuery(data, fileNumber):
+    # print('\n','-'*32,'\n','- Excel 결과물 출력 여부 [Y/N] -','\n','-'*32,'\n')
+    # userInput = input()
+    '@ 확인 메시지 : 임시 비활성화'
+    userInput = 'Y'
     if userInput == 'Y' or userInput == 'y':
-        printExcelResult(data) # Excel로 정제 및 출력
+        printExcelResult(data, fileNumber) # Excel로 정제 및 출력
     elif userInput == 'N' or userInput == 'n':
         pass
     else:
