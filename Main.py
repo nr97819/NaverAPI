@@ -1,12 +1,9 @@
 import DataCrawl
 import DataRefine
 import DataVisual
-
-def Gradient(ratio):
-    pass
+import DataCrawlByDate
 
 def Main():    
-    # 출력할 keyWord 입력 받기 <-----------------  
     # 민지 테스트
     data = {
         0:{'date': '2019.03.03.', 'title': 'KT, 멀티 클라우드 전략 확대?…MS와도 손잡는다', 'contents': ' KT가 멀티 클라우드 전략을 확대한다. 지난해 VM웨어와 손을 잡은데 이어 이번엔 마이크로소프트(MS)와 전략적 협업을 추진한다. 다만 KT는 지난 2011년부터 퍼블릭 클라우드 서비스인 ‘유클라우드비즈’를 운영 중인... '},
@@ -21,15 +18,31 @@ def Main():
         9:{'date': '2019.02.28.', 'title': '[기고] 클라우드 시장 개화기는 지금', 'contents': ' 클라우드 업계는 IBM과 같은 기술 기업의 연이은 인수합병과 함께 새로운 표준을 제시하는 기술적 진보가 이루어진 획기적인 해였다. 이러한 기술 업계의 변화에 맞춰, 기업 역시 경쟁력을 고취하는데 적합한 클라우드가... '}
     }
     resultWordData = DataRefine.DataRefining2(data)
-
-    refinedData = list()
+    
+    # 출력할 keyWord 입력 받기 <-----------------
+    resultData = list()
+    inputValue = ''
+    listForRecycle = []
+    
     test = [['클라우드', 'cloud'], ['클라우드 보안', 'cloud security']]
     for i in range(2):
-        # DataCrawl.SetKeyWord(input('검색어 입력\n').split(','))
+        # inputValue = input('키워드를 2개 입력하세요. (ex. 클라우드, cloud)\n')
+        # DataCrawl.SetKeyWord(inputValue.split(','))
+        # listForRecycle.append(inputValue)
         DataCrawl.SetKeyWord(test[i])
-        refinedData.append(DataRefine.DataRefining(DataCrawl.GetCrawlingResult()))
-    # DataVisual.PrintInfo(refinedData)
-    DataVisual.ChangeFind(refinedData)
+        listForRecycle.append(str(test[i]))
+
+        crawledData = DataCrawl.GetCrawlingResult()
+        refinedData = DataRefine.DataRefining(crawledData)
+        resultData.append(refinedData)
+    # DataVisual.PrintInfo(refinedData)기존 그래프
+    DataVisual.ChangeFind(resultData)
+
+    for i in range(2):
+        print('[', listForRecycle[i], '에 대한 상세검색 ]')
+        DataCrawlByDate.query = listForRecycle[i] # input 재활용
+        directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData() # <------------------- 워드 클라우드용 데이터
+        DataCrawlByDate.GetExcelResultQuery(directlyCrawledData)
 
 if __name__ == '__main__':
     Main()
