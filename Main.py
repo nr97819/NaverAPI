@@ -12,9 +12,6 @@ def Main():
     listForRecycle = []
     test = [['클라우드', 'cloud'], ['클라우드 보안', 'cloud security']]
     for i in range(2):
-        # inputValue = input('키워드를 2개 입력하세요. (ex. 클라우드, cloud)\n')
-        # DataCrawl.SetKeyWord(inputValue.split(','))
-        # listForRecycle.append(inputValue)
         DataCrawl.SetKeyWord(test[i])
         listForRecycle.append(str(test[i]))
 
@@ -24,12 +21,24 @@ def Main():
     # DataVisual.PrintInfo(resultData)
     targetDate = ChangeFind(resultData).targetDate
     print(targetDate)
-    for i in range(2):
-        print('[', listForRecycle[i], '에 대한 상세검색 ]')
+
+    count = 0
+    for i in range(2): # 1 : 클라우드, 2 : 클라우드 보안
+        print('[알림]', '\n','-'*66,'\n',listForRecycle[i], '에 대한 상세검색을 진행합니다 -','\n','-'*66,'\n')
         DataCrawlByDate.query = listForRecycle[i] # input 재활용
-        directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData() # <------------------- 워드 클라우드용 데이터
-        DataCrawlByDate.GetExcelResultQuery(directlyCrawledData)
-        resultWordData = DataRefine.DataRefining2(directlyCrawledData)
+        
+        for j in range(2): # 1 : 최상권, 2 : 최하권
+            if count % 2 == 0:
+                print('[진행] 급상승 기간 2곳을 검색합니다.')
+            else:
+                print('[진행] 급하강 기간 2곳을 검색합니다.')
+
+            for k in range(2): # 1 : 시작일 - 종료일
+                directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData(targetDate[count]) # 2nd 크롤링 result
+                fileNumber = (count % 4) + 1
+                DataCrawlByDate.GetExcelResultQuery(directlyCrawledData, fileNumber)
+
+                count = count + 1
 
 if __name__ == '__main__':
     Main()
