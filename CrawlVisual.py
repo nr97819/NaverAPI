@@ -9,7 +9,7 @@ def WordData(resultWordData):
     #stword = set(STOPWORDS)  # 제외할 단어s
     #stword.add('클라우드')
 
-    image= np.array(pilimg.open(r'C:\LAB\NaverAPI\c.png'))
+    image= np.array(pilimg.open(r'C:\NaverAPI\NaverAPI\c.png'))
     
     wc = WordCloud(max_font_size=180,     
                     min_font_size=10,     
