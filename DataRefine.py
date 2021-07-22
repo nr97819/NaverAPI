@@ -30,7 +30,11 @@ def DataRefining(resultData):
         })
 
     # 경로는 본인 PC에 맞게 설정
+<<<<<<< HEAD
     writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
+=======
+    writePath = r'C:\NaverAPI\NAVERAPI\naver_datalab_serch_%s.json' % refinedKeyWord
+>>>>>>> 82981c13d6a74b7b31dcb75765972e8b5e04cda6
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -40,7 +44,11 @@ def DataRefining(resultData):
     return refinedData
 
 def Tokenize(message):
+<<<<<<< HEAD
     with open(r'C:\NaverAPI\NaverAPI\stopWords.txt', 'rt',  encoding='UTF8') as file:
+=======
+    with open(r'C:\NaverAPI\NAVERAPI\stopWords.txt', 'rt',  encoding='UTF8') as file:
+>>>>>>> 82981c13d6a74b7b31dcb75765972e8b5e04cda6
         stopWords = file.read()
     stopWords = stopWords.split('\n')
     
@@ -74,6 +82,14 @@ def CountWords(data):
     if 'cloud' in counts:
         counts.pop('cloud')
 
+    num = 0
+    while num != len(counts):
+        if len(list(counts.keys())[num]) <= 1:
+            counts.pop(list(counts.keys())[num])
+            num = num
+        else:
+            num = num + 1
+
     return counts
 
 def DataRefining2(data):
@@ -84,7 +100,11 @@ def DataRefining2(data):
     resultWordData = CountWords(resultData)
     CrawlVisual.WordData(resultWordData)     
     # 경로는 본인 PC에 맞게 설정
+<<<<<<< HEAD
     writePath = r'C:\NaverAPI\NaverAPI\naver_crawl_word.json'
+=======
+    writePath = r'C:\NaverAPI\NAVERAPI\naver_crawl_word.json'
+>>>>>>> 82981c13d6a74b7b31dcb75765972e8b5e04cda6
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( resultWordData, 
                             indent=4,
