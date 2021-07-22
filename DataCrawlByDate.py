@@ -25,10 +25,10 @@ def InitVariables():
     query = query.replace(' ', '+') # 네이버 판정
     query = query.replace(',', '+')
 
-    maxNewsNum = int(input('최대 뉴스 수 입력 : '))
+    maxNewsNum = int(input('필요한 뉴스 기사 개수 : '))
 
-    startDate = input('검색 시작 날짜를 입력하세요 : (YYYYMMDD)\n') # 20210721
-    endDate = input('검색 종료 날짜를 입력하세요 : (YYYYMMDD)\n')
+    startDate = input('검색 시작일 : (YYYYMMDD)\n') # 20210721
+    endDate = input('검색 종료일 : (YYYYMMDD)\n')
 
     requestUrl = url
     requestUrl += '?sm=tab_hty.top&where=news'
@@ -62,13 +62,19 @@ def CrawlingByTime():
     while outerIndex < maxNewsNum: # idx를 전역변수로 선언한 이유 (누적 카운팅)
         
         '---------- 장기 작업 구간 ----------'
-        if flag and (time.time() - sTime) > 10: # 첫 경과 시 출력
+        if flag and (time.time() - sTime) > 6: # 첫 경과 시 출력
             print('\n작업이 길어지고 있습니다. 잠시만 기다려주세요... :)\n')
             flag = False
         '------------------------------------'
         
         table = soup.find('ul', {'class' : 'list_news'})
-        liList = table.find_all('li', {'id' : re.compile('sp_nws.*')}) 
+
+        '---------- 에러 처리 ----------'
+        if table is None:
+            print('\n','-'*32,'\n','- [알림] 검색 결과가 없습니다. -','\n','-'*32,'\n')
+            break
+
+        liList = table.find_all('li', {'id' : re.compile('sp_nws.*')})
         areaList = [li.find('div', {'class' : 'news_area'}) for li in liList]
 
         aList = [area.find('a', {'class' : 'news_tit'}) for area in areaList]
@@ -87,39 +93,39 @@ def CrawlingByTime():
             outerIndex = outerIndex + 1
             innerIndex = innerIndex + 1
 
-        nowPage = nowPage + 1
+        '---------- 에러 처리 ----------'
+        if len(liList) < 10:
+            print('\n자료량이 요구량보다 적습니다!\n', outerIndex, '개 출력했습니다.')
+            totalTime = (time.time() - sTime)
+            return newsResultDict, totalTime
 
+        nowPage = nowPage + 1
         pages = soup.find('div', {'class' : 'sc_page_inner'})
-        # <div class='sc_page_inner'>인 태그를 모두 찾아서 pages에 저장 (1 ~ 끝 페이지 넘버)
-        nextPageUrl = [p for p in pages.find_all('a') if p.text == str(nowPage)][0].get('href')
+
+        '---------- 에러 처리 ----------'
+        try:
+            nextPageUrl = [p for p in pages.find_all('a') if p.text == str(nowPage)][0].get('href')
+        except IndexError as ie:
+            print('\n자료량이 요구량보다 적습니다!\n', outerIndex, '개 출력했습니다.')
+            break
 
         req = requests.get(url + nextPageUrl)
-        # (반복) 다음 페이지 탐색 (처음의 request.get(주소)를 req에 담는 것을 반복)
         soup = BeautifulSoup(req.text, 'html.parser')
-        # (반복) 얻은 req를 파싱해서 soup에 담는 것을 반복
 
     # 현재t - 시작t = 소요t
     totalTime = (time.time() - sTime)
     
-    # [크롤링 결과, 소요 시간] 반환
     return newsResultDict, totalTime
 
 def GetNewsCrawlingData():
-    InitVariables() # 각종 변수들 초기화
-
-    try:
-        newsResultDict, totalTime = CrawlingByTime() # 크롤링 시작 !
-        
-    except Exception as e: # IndexError
-        print('\n자료량이 요구량보다 적습니다!\n다시 실행시켜주세요.')
-        exit() # 무책임한 처리 -> 추후 수정 필요
-
+    InitVariables()
+    newsResultDict, totalTime = CrawlingByTime()
     print('크롤링 완료')
 
     ' @ Terminal 결과 출력 - 임시 비활성화'
     # for i in range(len(newsResultDict)):
     #     print('date :', newsResultDict[i]['date'], '\ntitle :', newsResultDict[i]['title'], '\ncontents :', newsResultDict[i]['contents'], '\n')
-    print('소요 시간 :', round(totalTime, 3), '초')
+    print('소요 시간 :', round(totalTime, 2), '초')
 
     return newsResultDict
 
