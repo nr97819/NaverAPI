@@ -37,6 +37,7 @@ def Main():
                 directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData(targetDate[count]) # 2nd 크롤링 result
                 fileNumber = (count % 4) + 1
                 DataCrawlByDate.GetExcelResultQuery(directlyCrawledData, fileNumber)
+                DataRefine.DataRefining2(directlyCrawledData)
 
                 count = count + 1
 
