@@ -138,4 +138,4 @@ def GetExcelResultQuery(data):
         pass
     else:
         print('잘못된 입력입니다.')
-    print('종료합니다.')
+    print('종료합니다.\n')
