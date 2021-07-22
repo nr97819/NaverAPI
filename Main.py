@@ -13,7 +13,7 @@ def Main():
     listForRecycle = []
 
     for i in range(2):
-        inputValue = input(i, '번째 그룹의 키워드를 2개 입력하세요. (ex. 클라우드, cloud)\n')
+        inputValue = input('키워드를 2개 입력하세요. (ex. 클라우드, cloud)\n')
         DataCrawl.SetKeyWord(inputValue.split(','))
         listForRecycle.append(inputValue) # 재활용을 위해 List 사용
 
