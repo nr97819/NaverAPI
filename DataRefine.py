@@ -1,7 +1,7 @@
 from collections import defaultdict
 import re
 import json
-
+import CrawlVisual         #########################3
 # Summary:
 # 통합 검색어 트렌드 데이터 정제, 김민지
 # param:
@@ -30,7 +30,7 @@ def DataRefining(resultData):
         })
 
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:\NaverAPI\NaverAPI\naver_datalab_serch_%s.json' % refinedKeyWord
+    writePath = r'C:\LAB\NAVERAPI\naver_datalab_serch_%s.json' % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -60,9 +60,9 @@ def DataRefining2(data):
         resultData.append(data[i]['title']+' '+data[i]['contents'])
 
     resultWordData = count_words(resultData)
-
+    CrawlVisual.WordData(resultWordData)      ##############################################3
     # 경로는 본인 PC에 맞게 설정
-    writePath = r'C:\NaverAPI\NaverAPI\naver_crawl_word.json'
+    writePath = r'C:\LAB\NAVERAPI\naver_crawl_word.json'
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( resultWordData, 
                             indent=4,

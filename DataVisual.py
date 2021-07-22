@@ -30,7 +30,7 @@ def PrintInfo(addrData):
 
         plt.plot(x_label,y_label, 0.7, color='green')
 
-        plt.title(addrData[plotNum][0]['keyword'],fontsize=18,c='b')
+        plt.title(addrData[plotNum][0]['keyword'],fontsize=18,c='black')
         plt.xlabel('기간', c= 'purple')
         plt.ylabel('검색률',c='purple')
         plt.axis([1, addrData[plotNum][0]['len'], 0, 100]) 
@@ -49,3 +49,5 @@ def PrintInfo(addrData):
     - 정상적으로 통계 파일이 추출되었습니다 -
     -----------------------------------------
     ''')
+
+
