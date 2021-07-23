@@ -10,10 +10,13 @@ def Main():
     resultData = list()
     inputValue = ''
     listForRecycle = []
-    test = [['클라우드', 'cloud'], ['클라우드 보안', 'cloud security']]
+    # test = [['클라우드', 'cloud'], ['클라우드 보안', 'cloud security']]
     for i in range(2):
-        DataCrawl.SetKeyWord(test[i])
-        listForRecycle.append(str(test[i]))
+        inputKeyword = input("%d번째 검색할 단어를 입력해 주세요.\n" %(i+1)).split(',') 
+        # DataCrawl.SetKeyWord(test[i])
+        # listForRecycle.append(str(test[i]))
+        DataCrawl.SetKeyWord(inputKeyword)
+        listForRecycle.append(str(inputKeyword))
 
         crawledData = DataCrawl.GetCrawlingResult()
         refinedData = DataRefine.DataRefining(crawledData)
@@ -34,7 +37,7 @@ def Main():
                 print('[진행] 급하강 기간 2곳을 검색합니다.')
 
             for k in range(2): # 1 : 시작일 - 종료일
-                directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData(targetDate[count]) # 2nd 크롤링 result
+                directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData(targetDate[count], 50) # 2nd 크롤링 result
                 fileNumber = (count % 4) + 1
                 DataCrawlByDate.GetExcelResultQuery(directlyCrawledData, fileNumber)
                 DataRefine.DataRefining2(directlyCrawledData)
