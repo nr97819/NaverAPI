@@ -20,7 +20,7 @@ def WordData(resultWordData):
                     colormap ="PuBu"
                     )
 
-    wc.generate_from_frequencies(resultWordData)
+    wc.generate_from_frequencies(resultWordData[0]['data'])
 
     #wc.recolor(color_func= ImageColorGenerator(image))  
 

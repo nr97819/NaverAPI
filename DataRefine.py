@@ -84,7 +84,10 @@ def CountWords(data):
     exList = ['클라우드', 'cloud', '보안', 'security']
     
     for word in exList:
-        counts.pop(word)
+        if word in counts:
+            counts.pop(word)
+        else:
+            pass
     num = 0
     while num != len(counts):
         if len(list(counts.keys())[num]) <= 1:
