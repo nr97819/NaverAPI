@@ -75,6 +75,8 @@ def CountWords(data):
         counts.pop('클라우드')
     if 'cloud' in counts:
         counts.pop('cloud')
+    else:
+        pass
 
     num = 0
     while num != len(counts):
@@ -92,7 +94,7 @@ def DataRefining2(data):
         resultData.append(data[i]['title']+' '+data[i]['contents'])
 
     resultWordData = CountWords(resultData)
-    CrawlVisual.WordData(resultWordData)     
+    # CrawlVisual.WordData(resultWordData)     
     # 경로는 본인 PC에 맞게 설정
     writePath = os.getcwd() + "\\NaverAPI\\naver_crawl_word.json"
     with open(writePath, 'w', encoding='utf-8') as filedata:
