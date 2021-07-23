@@ -31,12 +31,12 @@ class ChangeFind:
             n_bkps = algo.predict(n_bkps)
             for i in range(len(n_bkps) - 1):
                 bkpsWidth.append(n_bkps[i + 1] - n_bkps[i])
-            maxTwo = sorted(range(len(bkpsWidth)), key=lambda i: bkpsWidth[i])[-2:]
-            minTwo = sorted(range(len(bkpsWidth)), key=lambda i: bkpsWidth[i])[:2]
-            self.targetDate.append(findValue[n_bkps[maxTwo[0] - 1]]["period"].replace('-', '') + '-' + findValue[n_bkps[maxTwo[0]]]["period"].replace('-', ''))
-            self.targetDate.append(findValue[n_bkps[maxTwo[1] - 1]]["period"].replace('-', '') + '-' + findValue[n_bkps[maxTwo[1]]]["period"].replace('-', ''))
-            self.targetDate.append(findValue[n_bkps[minTwo[0] - 1]]["period"].replace('-', '') + '-' + findValue[n_bkps[minTwo[0]]]["period"].replace('-', ''))
-            self.targetDate.append(findValue[n_bkps[minTwo[1] - 1]]["period"].replace('-', '') + '-' + findValue[n_bkps[minTwo[1]]]["period"].replace('-', ''))
+            minTwo = sorted(range(len(bkpsWidth)), key=lambda i: bkpsWidth[i])[-2:]
+            maxTwo = sorted(range(len(bkpsWidth)), key=lambda i: bkpsWidth[i])[:2]
+            self.targetDate.append(findValue[n_bkps[maxTwo[0]] - 1]["period"].replace('-', '') + '-' + findValue[n_bkps[maxTwo[0]]]["period"].replace('-', ''))
+            self.targetDate.append(findValue[n_bkps[maxTwo[1]] - 1]["period"].replace('-', '') + '-' + findValue[n_bkps[maxTwo[1]]]["period"].replace('-', ''))
+            self.targetDate.append(findValue[n_bkps[minTwo[0]] - 1]["period"].replace('-', '') + '-' + findValue[n_bkps[minTwo[0]]]["period"].replace('-', ''))
+            self.targetDate.append(findValue[n_bkps[minTwo[1]] - 1]["period"].replace('-', '') + '-' + findValue[n_bkps[minTwo[1]]]["period"].replace('-', ''))
 
             _, curr_ax = rpt.display(y_label[:, plotNum], n_bkps, num="SearchTrend")
             curr_ax[0].set_position(gs[plotNum].get_position(fig))
