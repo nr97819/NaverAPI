@@ -59,6 +59,7 @@ def Tokenize(message):
 
     allWords = re.findall("[가-힣a-z0-9]+", message)
 
+    # 불용어 처리
     for word in allWords:
         for stop in stopWords:
             if word.endswith(stop):
@@ -83,19 +84,21 @@ def CountWords(data, title):
 
     exList = re.split(', | ', title)
     
+    # 검색어와 같은 단어 제거
     for word in exList:
         if word in counts:
             counts.pop(word)
         else:
             pass
     
-    num = 0
-    while num != len(counts):
-        if len(list(counts.keys())[num]) <= 1:
-            counts.pop(list(counts.keys())[num])
-            num = num
+    NUM = 0
+    # 단어 길이가 1보다 작거나 같은 단어 제거
+    while NUM != len(counts):
+        if len(list(counts.keys())[NUM]) <= 1:
+            counts.pop(list(counts.keys())[NUM])
+            NUM = NUM
         else:
-            num = num + 1
+            NUM = NUM + 1
 
     return counts
 
