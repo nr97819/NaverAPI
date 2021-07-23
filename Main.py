@@ -20,8 +20,9 @@ def Main():
 
     count = 0
     for i in range(2): # 1 : 클라우드, 2 : 클라우드 보안
-        print('[알림]', '\n','-'*66,'\n', str(test[i]), '에 대한 상세검색을 진행합니다 -','\n','-'*66,'\n')
-        DataCrawlByDate.query = str(test[i]) # input 재활용
+        refinedInput = str(test[i][0] + ', ' + test[i][1])
+        print('[알림]', '\n','-'*60,'\n', refinedInput, '에 대한 상세검색을 진행합니다','\n','-'*60,'\n')
+        DataCrawlByDate.query = str(refinedInput) # input 재활용
         # print('[알림]', '\n','-'*66,'\n', str(inputKeyword[i]), '에 대한 상세검색을 진행합니다 -','\n','-'*66,'\n')
         # DataCrawlByDate.query = str(inputKeyword[i]) # input 재활용
         
@@ -37,7 +38,7 @@ def Main():
                 fileNumber = (count % 4) + 1
                 DataCrawlByDate.GetExcelResultQuery(directlyCrawledData, fileNumber)
                 
-                visualInfoList.append(str(test[i])) # 검색 주제
+                visualInfoList.append(refinedInput) # 검색 주제
                 # visualInfoList.append(str(inputKeyword[i])) # 검색 주제
                 visualInfoList.append(targetDate[count]) # 기간(날짜)
                 CrawlVisual.WordData(DataRefine.DataRefining2(directlyCrawledData, visualInfoList))
