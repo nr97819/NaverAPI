@@ -24,8 +24,9 @@ def WordData(resultWordData):
 
     #wc.recolor(color_func= ImageColorGenerator(image))  
 
-    plt.figure(figsize=(8, 5))
-    plt.title('검색어', fontsize='15')
+    plt.figure(figsize=(8, 6))
+    plt.title(resultWordData[0]['title'] +'  '+ resultWordData[0]['extremum'], fontsize='15')
+    plt.annotate(resultWordData[0]['date'], xy=(318,60), xycoords='figure pixels',fontsize='10')
     plt.imshow(wc,interpolation='bilinear')
     plt.tight_layout(pad=0)
     plt.axis('off')
