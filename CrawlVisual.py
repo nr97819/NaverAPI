@@ -19,8 +19,10 @@ def WordData(resultWordData):
                     mask= image,
                     colormap ="PuBu"
                     )
-
-    wc.generate_from_frequencies(resultWordData[0]['data'])
+    try:
+        wc.generate_from_frequencies(resultWordData[0]['data'])
+    except:
+        wc.generate_from_frequencies({"None": 1})
 
     #wc.recolor(color_func= ImageColorGenerator(image))  
 
