@@ -7,69 +7,81 @@ import time # 시간 측정용
 from pandas import DataFrame # Excel 출력용
 import os # 파일 경로 지정용
 
-# 오늘 날짜 값 정제
+# 오늘 날짜 저장
 date = str(datetime.now())
 date = date[:date.rfind(' ')]
 
-url = 'https://search.naver.com/search.naver'
-
-# maxNewsNum = 0
+URL = 'https://search.naver.com/search.naver'
 requestUrl = ''
 pages = None
 query = ''
 
-def InitVariables(startDate, endDate): # default : 100개
+# Summary:
+# 전역 변수 초기화
+# param:
+# 검색 시작일/종료일
+# returns:
+# 없음
+def InitVariables(startDate, endDate): # default 100
+    global requestUrl, pages, query # 전역
 
-    global requestUrl, pages, query # 전역 변수 사용 선언
+    query = query.replace(' ', '+') # 네이버 검색 윤활
 
-    # query = input('검색 키워드를 입력 : ')
-    query = query.replace(' ', '+') # 네이버 판정
-    query = query.replace(',', '+')
-
-    # maxNewsNum = int(input('필요한 뉴스 기사 개수 : '))
-    # startDate = input('검색 시작일 : (YYYYMMDD)\n') # 20210721
-    # endDate = input('검색 종료일 : (YYYYMMDD)\n')
-
-    requestUrl = url
+    # 최종 url 주소 생성
+    requestUrl = URL
     requestUrl += '?sm=tab_hty.top&where=news'
-    requestUrl += '&query=%s' % query # 검색어
+    requestUrl += '&query=%s' % query # 키워드
     requestUrl += '&sm=tab_opt&sort=0&photo=0&field=0&pd=3'
-    requestUrl += '&ds=%s.%s.%s' % (startDate[0:4], startDate[4:6], startDate[6:]) # news_url += '&ds=2000.01.01' (시작일)
-    requestUrl += '&de=%s.%s.%s' % (endDate[0:4], endDate[4:6], endDate[6:]) # news_url += '&de=2000.12.31' (종료일)
-    # 최종 url 주소값 생성
+    requestUrl += '&ds=%s.%s.%s' % (startDate[0:4], startDate[4:6], startDate[6:]) # '&ds=2000.01.01' (시작일)
+    requestUrl += '&de=%s.%s.%s' % (endDate[0:4], endDate[4:6], endDate[6:]) # '&de=2000.12.31' (종료일)
 
     req = requests.get(requestUrl)
     soup = BeautifulSoup(req.text, 'html.parser')
     pages = soup.find('div', {'class' : 'sc_page_inner'})
 
+# Summary:
+# 크롤링 기간별 작업 대행 (갑)
+# param:
+# 최대 출력 뉴스 수
+# returns:
+# 크롤링 결과 전달, 걸린 시간
 def CrawlingByTime(maxNewsNum):
     # 전역 변수로 url 받기
-    url = requestUrl
+    tempUrl = requestUrl
 
-    totalTime = 0 # 시간 측정용 변수
+    totalTime = 0
     sTime = time.time()
 
-    req = requests.get(url)
+    req = requests.get(tempUrl)
     soup = BeautifulSoup(req.text, 'html.parser') # 파싱
 
-    newsResultDict = {} # key : 번호, value : 뉴스 제목, contents : 내용 미리보기
-    outerIndex = 0 # 현재 뉴스의 번호 (*** idx를 전역변수로 선언한 이유)
-    nowPage = 1
+    newsResultDict = SplitUsableData(soup, maxNewsNum, sTime, tempUrl)
 
+    totalTime = (time.time() - sTime)
+    return newsResultDict, totalTime
+
+# Summary:
+# 크롤링 기간별 작업 (을)
+# param:
+# 중간 전달 (soup, maxNewsNum, sTime, tempUrl)
+# returns:
+# 크롤링 결과
+def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
     print('크롤링 중...')
 
+    newsResultDict = {}
+    outerIndex = 0
+    nowPage = 1
+
     flag = True
-    while outerIndex < maxNewsNum: # idx를 전역변수로 선언한 이유 (누적 카운팅)
-        
-        '---------- 장기 작업 구간 ----------'
-        if flag and (time.time() - sTime) > 6: # 첫 경과 시 출력
+    while outerIndex < maxNewsNum:
+        # 5초 경과시 (1st case만) 안내
+        if flag and (time.time() - sTime) > 5:
             print('\n작업이 길어지고 있습니다. 잠시만 기다려주세요... :)\n')
             flag = False
-        '------------------------------------'
         
         table = soup.find('ul', {'class' : 'list_news'})
-
-        '---------- 에러 처리 ----------'
+        # 에러 처리 (무)
         if table is None:
             print('\n','-'*32,'\n','- [알림] 검색 결과가 없습니다. -','\n','-'*32,'\n')
             break
@@ -92,60 +104,58 @@ def CrawlingByTime(maxNewsNum):
             newsResultDict[outerIndex] = {'date' : n.text, 'title' : aList[innerIndex].get('title'), 'contents' : contentsList[innerIndex]} 
             outerIndex = outerIndex + 1
             innerIndex = innerIndex + 1
-
-        '---------- 에러 처리 ----------'
+        # 에러 처리 (게시수)
         if len(liList) < 10:
-            print('\n자료량이 요구량보다 적습니다!\n', outerIndex, '개 출력했습니다.')
-            totalTime = (time.time() - sTime)
-            return newsResultDict, totalTime
+            print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
+            return newsResultDict
 
         nowPage = nowPage + 1
         pages = soup.find('div', {'class' : 'sc_page_inner'})
-
-        '---------- 에러 처리 ----------'
+        # 에러 처리 (페이지수)
         try:
             nextPageUrl = [p for p in pages.find_all('a') if p.text == str(nowPage)][0].get('href')
         except IndexError as ie:
-            print('\n자료량이 요구량보다 적습니다!\n', outerIndex, '개 출력했습니다.')
+            print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
             break
 
-        req = requests.get(url + nextPageUrl)
+        req = requests.get(tempUrl + nextPageUrl)
         soup = BeautifulSoup(req.text, 'html.parser')
-
-    # 현재t - 시작t = 소요t
-    totalTime = (time.time() - sTime)
-    
-    return newsResultDict, totalTime
-
-def GetNewsCrawlingData(sampleList, maxNewsNum=100):
-    startDate, endDate = sampleList.split('-')
-    InitVariables(startDate, endDate)
-    newsResultDict, totalTime = CrawlingByTime(maxNewsNum)
-    print('크롤링 완료')
-
-    ' @ Terminal 결과 출력 - 임시 비활성화'
-    # for i in range(len(newsResultDict)):
-    #     print('date :', newsResultDict[i]['date'], '\ntitle :', newsResultDict[i]['title'], '\ncontents :', newsResultDict[i]['contents'], '\n')
-    print('소요 시간 :', round(totalTime, 2), '초')
 
     return newsResultDict
 
+# Summary:
+# 메인에서 크롤링을 위한 호출 (작업 뭉치)
+# param:
+# '20000101-20010101', 최대 기사 수(기본 100)
+# returns:
+# 검색 결과
+def GetNewsCrawlingData(dateList, maxNewsNum=100):
+    startDate, endDate = dateList.split('-')
+    InitVariables(startDate, endDate)                       # 초기화
+    newsResultDict, totalTime = CrawlingByTime(maxNewsNum)  # 크롤링 (기간별)
+    print(maxNewsNum, '개(최대) 출력되었습니다.')
+    print('크롤링 완료!')
+    print('소요 시간 :', round(totalTime, 2), '초')
+    return newsResultDict
+
+# Summary:
+# EXCEL 출력 대행 (을)
+# param:
+# 기간, 파일번호
+# returns:
+# 없음
 def printExcelResult(data, fileNumber):
     dateFrame = DataFrame(data).T
     filePath = os.getcwd() + r'\\NaverAPI\\'
     fileName = filePath + '%s의_결과_%s_%s.xlsx' % (query, fileNumber, date)
     dateFrame.to_excel(fileName)
-    print('Excel 출력 완료!')
+    print('Excel 파일 출력 완료!\n')
 
+# Summary:
+# EXCEL 출력 대행 (갑)
+# param:
+# 기간, 파일번호 (전달)
+# returns:
+# 없음
 def GetExcelResultQuery(data, fileNumber):
-    # print('\n','-'*32,'\n','- Excel 결과물 출력 여부 [Y/N] -','\n','-'*32,'\n')
-    # userInput = input()
-    '@ 확인 메시지 : 임시 비활성화'
-    userInput = 'Y'
-    if userInput == 'Y' or userInput == 'y':
-        printExcelResult(data, fileNumber) # Excel로 정제 및 출력
-    elif userInput == 'N' or userInput == 'n':
-        pass
-    else:
-        print('잘못된 입력입니다.')
-    print('종료합니다.\n')
+    printExcelResult(data, fileNumber)
