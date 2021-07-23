@@ -60,9 +60,9 @@ def Tokenize(message):
     allWords = re.findall("[가-힣a-z0-9]+", message)
 
     for word in allWords:
-        for i in stopWords:
-            if i in word:
-                resultWord = word.replace(i, '')
+        for stop in stopWords:
+            if word.endswith(stop):
+                resultWord = word.replace(stop, '')
                 allWords[allWords.index(word)] = resultWord
                 break
 
@@ -74,20 +74,21 @@ def Tokenize(message):
 # data - 단어 빈도수 추출할 뉴스 데이터
 # returns:
 # counts - 단어 빈도수 추출된 뉴스 데이터
-def CountWords(data):
+def CountWords(data, title):
     counts = defaultdict(lambda: 0)
 
     for message in data:
         for word in Tokenize(message):
             counts[word] = counts[word] + 1
 
-    exList = ['클라우드', 'cloud', '보안', 'security']
+    exList = re.split(', | ', title)
     
     for word in exList:
         if word in counts:
             counts.pop(word)
         else:
             pass
+    
     num = 0
     while num != len(counts):
         if len(list(counts.keys())[num]) <= 1:
@@ -114,7 +115,7 @@ def DataRefining2(data, info):
     resultWordData.append({'title':info[1],
                         'date':info[2],
                         'extremum':info[0],
-                        'data':CountWords(resultData)
+                        'data':CountWords(resultData, info[1])
     })
 
     writePath = os.getcwd() + "\\NaverAPI\\naver_crawl_word_%s_%s_%s.json" % (info[1], info[2], info[0])
