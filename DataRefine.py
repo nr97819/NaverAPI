@@ -81,7 +81,7 @@ def CountWords(data, title):
         for word in Tokenize(message):
             counts[word] = counts[word] + 1
 
-    exList = title.split(', ')
+    exList = re.split(', | ', title)
     
     for word in exList:
         if word in counts:
