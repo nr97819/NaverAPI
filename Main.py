@@ -19,8 +19,8 @@ def Main():
     targetDate = ChangeFind(resultData).targetDate
 
     count = 0
+    refinedInput = str(inputKeyword[0] + ', ' + inputKeyword[1])
     for i in range(2): # 1 : 클라우드, 2 : 클라우드 보안
-        refinedInput = str(test[i][0] + ', ' + test[i][1])
         print('[알림]', '\n','-'*60,'\n', refinedInput, '에 대한 상세검색을 진행합니다','\n','-'*60,'\n')
         DataCrawlByDate.query = str(refinedInput) # input 재활용
         # print('[알림]', '\n','-'*66,'\n', str(inputKeyword[i]), '에 대한 상세검색을 진행합니다 -','\n','-'*66,'\n')
