@@ -37,7 +37,7 @@ def Main():
                 else:
                     visualInfoList.append('관심도 하위 구간') # 검색 주제
 
-                directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData(targetDate[count], 50) # 2nd 크롤링 result
+                directlyCrawledData = DataCrawlByDate.GetNewsCrawlingData(targetDate[count]) # 2nd 크롤링 result
                 fileNumber = (count % 4) + 1
                 DataCrawlByDate.GetExcelResultQuery(directlyCrawledData, fileNumber)
                 

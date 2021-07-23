@@ -15,6 +15,7 @@ URL = 'https://search.naver.com/search.naver'
 requestUrl = ''
 pages = None
 query = ''
+printFlag = True
 
 # Summary:
 # 전역 변수 초기화
@@ -75,6 +76,7 @@ def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
 
     flag = True
     while outerIndex < maxNewsNum:
+        global printFlag
         # 5초 경과시 (1st case만) 안내
         if flag and (time.time() - sTime) > 5:
             print('\n작업이 길어지고 있습니다. 잠시만 기다려주세요... :)\n')
@@ -108,6 +110,7 @@ def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
         if len(liList) < 10:
             # print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
             print('\n', outerIndex, '개 출력되었습니다.')
+            printFlag = False
             return newsResultDict
 
         nowPage = nowPage + 1
@@ -118,6 +121,7 @@ def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
         except IndexError as ie:
             # print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
             print('\n', outerIndex, '개 출력되었습니다.')
+            printFlag = False
             break
 
         req = requests.get(tempUrl + nextPageUrl)
@@ -131,11 +135,12 @@ def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
 # '20000101-20010101', 최대 기사 수(기본 100)
 # returns:
 # 검색 결과
-def GetNewsCrawlingData(dateList, maxNewsNum=100):
+def GetNewsCrawlingData(dateList, maxNewsNum=50):
     startDate, endDate = dateList.split('-')
     InitVariables(startDate, endDate)                       # 초기화
     newsResultDict, totalTime = CrawlingByTime(maxNewsNum)  # 크롤링 (기간별)
-    print(maxNewsNum, '개(최대) 출력되었습니다.')
+    if printFlag:
+        print(maxNewsNum, '개(최대) 출력되었습니다.')
     print('크롤링 완료!')
     print('소요 시간 :', round(totalTime, 2), '초')
     return newsResultDict
