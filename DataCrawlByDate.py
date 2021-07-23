@@ -106,7 +106,8 @@ def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
             innerIndex = innerIndex + 1
         # 에러 처리 (게시수)
         if len(liList) < 10:
-            print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
+            # print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
+            print('\n', outerIndex, '개 출력되었습니다.')
             return newsResultDict
 
         nowPage = nowPage + 1
@@ -115,7 +116,8 @@ def SplitUsableData(soup, maxNewsNum, sTime, tempUrl):
         try:
             nextPageUrl = [p for p in pages.find_all('a') if p.text == str(nowPage)][0].get('href')
         except IndexError as ie:
-            print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
+            # print('\n자료가 부족합니다.\n', outerIndex, '개 출력되었습니다.')
+            print('\n', outerIndex, '개 출력되었습니다.')
             break
 
         req = requests.get(tempUrl + nextPageUrl)
