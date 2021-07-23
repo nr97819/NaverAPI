@@ -12,6 +12,11 @@ def Main():
     test = [['클라우드', 'cloud'], ['클라우드 보안', 'cloud security']]
     for i in range(2):
         inputKeyword = input("%d번째 검색할 단어를 입력해 주세요.\n" %(i+1)).split(',') 
+        ' ----------- 테스팅용 -----------'
+        if inputKeyword[0] == '': # Enter 입력 시, 디폴트 적용
+            print('디폴트 값 사용\n')
+            inputKeyword = test[i]
+        ' ---------- ---------- ----------'
         DataCrawl.SetKeyWord(inputKeyword)
         refinedInputList.append(str(inputKeyword[0] + ', ' + inputKeyword[1])) # 2차 crawl을 위해, 정제 및 저장
 
