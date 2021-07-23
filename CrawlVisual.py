@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def WordData(resultWordData):
-    
     #stword = set(STOPWORDS)  # 제외할 단어s
     #stword.add('클라우드')
 
@@ -23,13 +22,12 @@ def WordData(resultWordData):
         wc.generate_from_frequencies(resultWordData[0]['data'])
     except:
         wc.generate_from_frequencies({"None": 1})
-
     #wc.recolor(color_func= ImageColorGenerator(image))  
-
-    plt.figure(figsize=(8, 6))
-    plt.title(resultWordData[0]['title'] +'  '+ resultWordData[0]['extremum'], fontsize='15')
-    plt.annotate(resultWordData[0]['date'], xy=(318,60), xycoords='figure pixels',fontsize='10')
-    plt.imshow(wc,interpolation='bilinear')
-    plt.tight_layout(pad=0)
-    plt.axis('off')
-    plt.show()
+    # plt.figure(figsize=(8, 6))
+    # plt.title(resultWordData[0]['title'] +'  '+ resultWordData[0]['extremum'], fontsize='15')
+    # plt.annotate(resultWordData[0]['date'], xy=(318,60), xycoords='figure pixels',fontsize='10')
+    # plt.imshow(wc,interpolation='bilinear')
+    # plt.tight_layout(pad=0)
+    # plt.axis('off')
+    # plt.show()
+    return(wc)
