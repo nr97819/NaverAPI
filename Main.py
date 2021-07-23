@@ -10,9 +10,9 @@ def Main():
     resultData = list()
     test = [['클라우드', 'cloud'], ['클라우드 보안', 'cloud security']]
     for i in range(2):
-        # inputKeyword = input("%d번째 검색할 단어를 입력해 주세요.\n" %(i+1)).split(',') 
-        # DataCrawl.SetKeyWord(inputKeyword)
-        DataCrawl.SetKeyWord(test[i])
+        inputKeyword = input("%d번째 검색할 단어를 입력해 주세요.\n" %(i+1)).split(',') 
+        DataCrawl.SetKeyWord(inputKeyword)
+        # DataCrawl.SetKeyWord(test[i])
         crawledData = DataCrawl.GetCrawlingResult()
         refinedData = DataRefine.DataRefining(crawledData)
         resultData.append(refinedData)
