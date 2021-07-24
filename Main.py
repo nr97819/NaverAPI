@@ -57,6 +57,6 @@ def Main():
         ax.axis('off')
     fig.tight_layout(pad=0)
     plt.show()
-    
+
 if __name__ == '__main__':
     Main()
