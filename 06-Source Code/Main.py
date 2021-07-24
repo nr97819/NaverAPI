@@ -15,7 +15,7 @@ def Main():
     titleText = list()
 
     for i in range(2):
-        inputKeyword = input("%d번째 검색할 단어를 입력해 주세요.\n" %(i+1)).split(',') 
+        inputKeyword = input("%d번째 검색할 단어 두 개를 \",\"로 구분하여 입력해 주세요. (국문, 영문)\n" %(i+1)).split(',') 
         
         DataCrawl.SetKeyWord(inputKeyword)
         refinedInputList.append(str(inputKeyword[0] + ', ' + inputKeyword[1])) # 2차 crawl을 위해, 정제 및 저장
@@ -48,11 +48,11 @@ def Main():
                 wc.append(CrawlVisual.WordData(refinedText))
                 count = count + 1
     wcNum = 0
-    fig = plt.figure(figsize=(14, 12))
+    fig = plt.figure(figsize=(14, 12), facecolor="white")
     for wcItems in wc:
         wcNum = wcNum + 1
         ax = fig.add_subplot(2, 4, wcNum)
-        ax.set_title(titleText[wcNum - 1][0]['title'] +'  '+ titleText[wcNum - 1][0]['extremum'] +'\n'+ titleText[wcNum - 1][0]['date'], fontsize='8')
+        ax.set_title(titleText[wcNum - 1][0]['title'] +'  '+ titleText[wcNum - 1][0]['extremum'] +'\n'+ titleText[wcNum - 1][0]['date'], fontsize='10')
         ax.imshow(wcItems,interpolation='bilinear')
         ax.axis('off')
     fig.tight_layout(pad=0)
