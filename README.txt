@@ -8,3 +8,4 @@
     # DataRefine : defaultdict, re, json, os
     # ChangeFinder : matplotlib, numpy, ruptures
     # CrawlVisual : os, WordCloud, PIL, matplotlib, numpy
+    .
