@@ -1,7 +1,0 @@
-nginx
-    install nginx
-    set environment nginx
-
-python3.8
-    install python3.8
-    install flask

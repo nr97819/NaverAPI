@@ -5,13 +5,9 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
-# @app.route('/')
-# def hello_world():
-#     return render_template('home.html')
-
-# @app.route('/test')
-# def test():
-#     return render_template('get.html')
+@app.route('/')
+def hello_world():
+    return render_template('home.html')
 
 @app.route('/', methods=['post'])
 def get():
@@ -24,5 +20,3 @@ def get():
 
 if __name__ == '__main__':
     app.run()
-
-#
