@@ -9,19 +9,14 @@ app.config['JSON_AS_ASCII'] = False
 def hello_world():
     return render_template('home.html')
 
-@app.route('/test')
-def test():
-    return render_template('get.html')
-
-# @app.route('/get', methods=['get'])
-@app.route('/post', methods=['post'])
+@app.route('/', methods=['post'])
 def get():
     keyword1 = request.form['keyword1']
     keyword2 = request.form['keyword2']
     enkeyword1 = translator.translate(keyword1, dest='en')
     enkeyword2 = translator.translate(keyword2, dest='en')
     result = str([keyword1, enkeyword1.text, keyword2, enkeyword2.text])
-    return result
+    return render_template('home.html', result=result)
 
 if __name__ == '__main__':
     app.run()
