@@ -23,5 +23,12 @@ def WordData(resultWordData):
         wc.generate_from_frequencies(resultWordData[0]['data'])
     except:
         wc.generate_from_frequencies({"None": 1})
-    # wc.recolor(color_func= ImageColorGenerator(backImage))  
+    # wc.recolor(color_func= ImageColorGenerator(backImage))
+    # fig = plt.figure(figsize=(14, 12), facecolor="white")
+    # plt.title(titleText['title'] +'  '+ titleText['extremum'] +'\n'+ titleText[0]['date'], fontsize='10')
+    # plt.imshow(wc,interpolation='bilinear')
+    # plt.axis('off')
+    # plt.tight_layout(pad=0)
+    # plt.show()
+    # fig.savefig(os.getcwd() + r'/static/%s.png' % titleText[0]['date'])
     return(wc)
