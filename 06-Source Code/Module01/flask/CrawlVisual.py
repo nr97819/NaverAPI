@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def WordData(resultWordData):
-    backImage = pilimg.open(os.getcwd() + "\\NaverAPI\\06-Source Code\\cloudShape.png").convert("RGBA")
+    backImage = pilimg.open(os.getcwd() + "\\flask\\cloudShape.png").convert("RGBA")
     x, y = backImage.size
     mask = pilimg.new("RGBA", backImage.size, (255, 255, 255))
     mask.paste(backImage, (0, 0, x, y), backImage)

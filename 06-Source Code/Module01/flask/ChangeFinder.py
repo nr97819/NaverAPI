@@ -3,7 +3,8 @@ from matplotlib import font_manager
 import matplotlib
 import numpy as np
 import ruptures as rpt
-fromLocation = r"C:\Windows\Fonts\H2GTRM.TTF"
+import os
+fromLocation = os.getcwd() + "\\flask\\H2GTRM.TTF"
 fontName = font_manager.FontProperties(fname=fromLocation).get_name()
 matplotlib.rc('font', family=fontName)
 class ChangeFind:
