@@ -30,7 +30,7 @@ def DataRefining(resultData):
                             'ratio' : refinedRatio
         })
 
-    writePath = os.getcwd() + "\\flask\\naver_datalab_serch_%s.json" % refinedKeyWord
+    writePath = os.getcwd() + r"/naver_datalab_serch_%s.json" % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -46,7 +46,7 @@ def DataRefining(resultData):
 # returns:
 # allWords - 자연어 처리된 문장
 def Tokenize(message):
-    with open(os.getcwd() + "\\flask\\stopWords.txt", 'rt',  encoding='UTF8') as file:
+    with open(os.getcwd() + r"/stopWords.txt", 'rt',  encoding='UTF8') as file:
         stopWords = file.read()
     stopWords = stopWords.split('\n')
     
@@ -121,7 +121,7 @@ def DataRefining2(data, info):
                         'data':CountWords(resultData, info[1])
     })
 
-    writePath = os.getcwd() + "\\flask\\naver_crawl_word_%s_%s_%s.json" % (info[1], info[2], info[0])
+    writePath = os.getcwd() + r"/naver_crawl_word_%s_%s_%s.json" % (info[1], info[2], info[0])
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( resultWordData, 
                             indent=4,

@@ -1,7 +1,6 @@
 version: '3'
 services:
   flask:
-      build: ./flask
       container_name: flask
       image: "flask:test"
       ports:
@@ -9,7 +8,6 @@ services:
       networks:
       - backend
   nginx:
-      build: ./nginx
       container_name: nginx
       image: "nginx:test"
       ports:
