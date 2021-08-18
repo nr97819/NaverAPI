@@ -1,11 +1,11 @@
-import os
 from wordcloud import WordCloud, STOPWORDS,ImageColorGenerator
 import PIL.Image as pilimg
 import matplotlib.pyplot as plt
 import numpy as np
+workDir = "C:\\NaverAPI\\06-Source Code\\Module01\\"
 
 def WordData(resultWordData):
-    backImage = pilimg.open(os.getcwd() + "\\NaverAPI\\06-Source Code\\cloudShape.png").convert("RGBA")
+    backImage = pilimg.open(workDir + "cloudShape.png").convert("RGBA")
     x, y = backImage.size
     mask = pilimg.new("RGBA", backImage.size, (255, 255, 255))
     mask.paste(backImage, (0, 0, x, y), backImage)

@@ -5,7 +5,7 @@ from requests.api import request
 import re # 정규식용
 import time # 시간 측정용
 from pandas import DataFrame # Excel 출력용
-import os # 파일 경로 지정용
+workDir = "C:\\NaverAPI\\06-Source Code\\Module01\\"
 
 # 오늘 날짜 저장
 date = str(datetime.now())
@@ -153,7 +153,7 @@ def GetNewsCrawlingData(dateList, maxNewsNum=50):
 # 없음
 def printExcelResult(data, fileNumber):
     dateFrame = DataFrame(data).T
-    filePath = os.getcwd() + r'\\NaverAPI\\06-Source Code\\'
+    filePath = workDir
     fileName = filePath + '%s의_결과_%s_%s.xlsx' % (query, fileNumber, date)
     dateFrame.to_excel(fileName)
     print('Excel 파일 출력 완료!\n')

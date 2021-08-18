@@ -2,7 +2,7 @@ from collections import defaultdict
 import re
 import json
 import os
-workDir = "C:\\NaverAPI\\06-Source Code\\Module01\\"
+workDir = "C:\\NaverAPI\\NaverAPI\\06-Source Code\\"
 
 # Summary:
 # 통합 검색어 트렌드 데이터 정제, 김민지
@@ -31,7 +31,7 @@ def DataRefining(resultData):
                             'ratio' : refinedRatio
         })
 
-    writePath = workDir + "naver_datalab_serch_%s.json" % refinedKeyWord
+    writePath = os.getcwd() + "\\NaverAPI\\06-Source Code\\naver_datalab_serch_%s.json" % refinedKeyWord
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( refinedData, 
                             indent=4,
@@ -47,7 +47,7 @@ def DataRefining(resultData):
 # returns:
 # allWords - 자연어 처리된 문장
 def Tokenize(message):
-    with open(workDir + "stopWords.txt", 'rt',  encoding='UTF8') as file:
+    with open(os.getcwd() + "\\NaverAPI\\06-Source Code\\stopWords.txt", 'rt',  encoding='UTF8') as file:
         stopWords = file.read()
     stopWords = stopWords.split('\n')
     
@@ -122,7 +122,7 @@ def DataRefining2(data, info):
                         'data':CountWords(resultData, info[1])
     })
 
-    writePath = workDir + "naver_crawl_word_%s_%s_%s.json" % (info[1], info[2], info[0])
+    writePath = os.getcwd() + "\\NaverAPI\\06-Source Code\\naver_crawl_word_%s_%s_%s.json" % (info[1], info[2], info[0])
     with open(writePath, 'w', encoding='utf-8') as filedata:
         rJson = json.dumps( resultWordData, 
                             indent=4,
