@@ -5,14 +5,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def WordData(resultWordData):
-    backImage = pilimg.open(os.getcwd() + "\\flask\\cloudShape.png").convert("RGBA")
+    backImage = pilimg.open(os.getcwd() + r"/cloudShape.png").convert("RGBA")
     x, y = backImage.size
     mask = pilimg.new("RGBA", backImage.size, (255, 255, 255))
     mask.paste(backImage, (0, 0, x, y), backImage)
     mask = np.array(mask)
     wc = WordCloud(max_font_size = 180,     
                     min_font_size = 10,     
-                    font_path = 'C:\\Windows\\Fonts\\HMKMAMI.ttf',
+                    font_path = os.getcwd() + r"/H2GTRM.TTF" ,
                     background_color ='white', 
                     # width=800, height=800,
                     mask = mask,

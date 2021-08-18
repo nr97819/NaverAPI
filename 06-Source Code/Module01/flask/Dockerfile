@@ -21,5 +21,6 @@ RUN pip install datetime
 RUN pip install requests
 RUN pip install beautifulsoup4
 RUN pip install pandas
+RUN pip install openpyxl
 
-CMD [ "python", "run.py" ]
+CMD ["uwsgi","uwsgi.ini"]
