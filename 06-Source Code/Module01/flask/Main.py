@@ -7,18 +7,20 @@ from ChangeFinder import ChangeFind
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS,ImageColorGenerator
 import PIL.Image as pilimg
+import os
 
-def Main():      
+def Main(resultKeyword): 
     resultData = list()
     refinedInputList = []
     wc = list()
     titleText = list()
-
+    inputKeyword = list()
+    inputKeyword.append(resultKeyword[:2])
+    inputKeyword.append(resultKeyword[2:])
+    
     for i in range(2):
-        inputKeyword = input("%d번째 검색할 단어 두 개를 \",\"로 구분하여 입력해 주세요. (국문, 영문)\n" %(i+1)).split(',') 
-        
-        DataCrawl.SetKeyWord(inputKeyword)
-        refinedInputList.append(str(inputKeyword[0] + ', ' + inputKeyword[1])) # 2차 crawl을 위해, 정제 및 저장
+        DataCrawl.SetKeyWord(inputKeyword[i])
+        refinedInputList.append(str(inputKeyword[i][0] + ', ' + inputKeyword[i][1])) # 2차 crawl을 위해, 정제 및 저장
         
         crawledData = DataCrawl.GetCrawlingResult()
         refinedData = DataRefine.DataRefining(crawledData)
@@ -57,6 +59,8 @@ def Main():
         ax.axis('off')
     fig.tight_layout(pad=0)
     plt.show()
+    return(fig)
 
 if __name__ == '__main__':
+    # Main(['클라우드', 'cloud', '클라우드 보안', 'cloud security'])
     Main()

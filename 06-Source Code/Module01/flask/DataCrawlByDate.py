@@ -153,7 +153,7 @@ def GetNewsCrawlingData(dateList, maxNewsNum=50):
 # 없음
 def printExcelResult(data, fileNumber):
     dateFrame = DataFrame(data).T
-    filePath = os.getcwd() + r'\\NaverAPI\\06-Source Code\\'
+    filePath = os.getcwd() + r'\\flask\\'
     fileName = filePath + '%s의_결과_%s_%s.xlsx' % (query, fileNumber, date)
     dateFrame.to_excel(fileName)
     print('Excel 파일 출력 완료!\n')
