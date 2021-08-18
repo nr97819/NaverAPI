@@ -58,8 +58,8 @@ def Main(resultKeyword):
         ax.imshow(wcItems,interpolation='bilinear')
         ax.axis('off')
     fig.tight_layout(pad=0)
-    plt.show()
-    return(fig)
+    # plt.show()
+    fig.savefig(os.getcwd() + r'/static/graph.png')
 
 if __name__ == '__main__':
     # Main(['클라우드', 'cloud', '클라우드 보안', 'cloud security'])

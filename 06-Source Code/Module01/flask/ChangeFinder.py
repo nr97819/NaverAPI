@@ -4,6 +4,7 @@ import matplotlib
 import numpy as np
 import ruptures as rpt
 import os
+# fromLocation = os.getcwd() + r"/flask/H2GTRM.TTF"
 fromLocation = os.getcwd() + r"/H2GTRM.TTF" 
 fontName = font_manager.FontProperties(fname=fromLocation).get_name()
 matplotlib.rc('font', family=fontName)
@@ -50,4 +51,5 @@ class ChangeFind:
             curr_ax[0].set_ylabel('검색률')
             plt.title(addrData[plotNum][0]['keyword'], fontsize=16, c='indigo', weight='bold')
         plt.tight_layout()
+        fig.savefig(os.getcwd() + r'/static/trend.png')
         # plt.show()
