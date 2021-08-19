@@ -25,9 +25,9 @@ def WordData(resultWordData, count, titleText):
         wc.generate_from_frequencies(resultWordData[0]['data'])
     except:
         wc.generate_from_frequencies({"Not Enough Results": 1})
-    fig = plt.figure(figsize=(3, 2), facecolor="white")
-    plt.title(titleText['title'] +'  '+ titleText['extremum'] +'\n'+ titleText['date'], fontsize='10')
-    plt.imshow(wc,interpolation='bilinear')
+    fig = plt.figure(figsize=(10, 10), facecolor="white")
+    plt.title(titleText['title'] +'  '+ titleText['extremum'] +'\n'+ titleText['date'], fontsize='24')
+    plt.imshow(wc, interpolation='bilinear')
     plt.axis('off')
     plt.tight_layout(pad=0)
     # plt.show()
