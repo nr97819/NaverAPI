@@ -8,7 +8,7 @@ app.config['JSON_AS_ASCII'] = False
 
 @app.route('/')
 def hello_world():
-    return render_template('home.html', welcome='welcome.png')
+    return render_template('home.html', welcome='welcome.png', flag='true')
 
 @app.route('/result', methods=['post'])
 def get():
@@ -19,7 +19,7 @@ def get():
     resultKeyword = str([keyWord1, enkeyWord1.text, keyWord2, enkeyWord2.text])
     resultKeyword = [keyWord1, enkeyWord1.text, keyWord2, enkeyWord2.text]
     Main.Main(resultKeyword)
-    return render_template('result.html', trend='trend.png', graph='graph.png')
+    return render_template('result.html', flag='true')
 
 if __name__ == '__main__':
     app.run(debug=True)

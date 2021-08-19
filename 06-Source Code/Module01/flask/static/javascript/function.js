@@ -3,6 +3,12 @@ function input_Text(){
     document.getElementById("input2").value = "클라우드 보안";
 }
 
+function newClickEvent(){
+    document.getElementById("loading-image").hidden = null;
+    // document.getElementsByClassName("loading").style.position="fixed"
+    // document.getElementsByClassName("loading").style.display="blocked"
+}
+
 function zoomIn(event) {
     event.target.style.transform = "scale(2.5)";
     event.target.style.zIndex = 1;

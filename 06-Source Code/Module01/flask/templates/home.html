@@ -7,6 +7,7 @@
                          minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
         <title>Home Page </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+        
     </head>
     <body>
         <script src="{{ url_for('static', filename='javascript/function.js') }}"></script>
@@ -18,9 +19,12 @@
                     <p><input type="text" id='input1' name="keyword1" placeholder="ex. 클라우드"></p>
                     <p>비교할 검색어 2</p>
                     <p><input type="text" id='input2' name="keyword2" placeholder="ex. 클라우드 보안"></p>
-                    <input style="background-color:rgb(133, 235, 187);" type="submit" value="검색" >
+                    <input style="background-color:rgb(133, 235, 187);" type="submit" value="검색" onclick='newClickEvent()'>
                     <input type='button' onclick='input_Text()' value='샘플 키워드 입력'/>
                 </form>
+            </div>
+            <div class="loading">
+                <img id="loading-image" src="{{ url_for('static', filename='LoadingSpin.gif')}}" alt="Loading..." hidden="true" />
             </div>
             <div class="right">
                 <p><img src="{{ url_for('static', filename=welcome)}}", width="480"></p>
