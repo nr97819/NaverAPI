@@ -4,7 +4,9 @@ import matplotlib
 import numpy as np
 import ruptures as rpt
 import os
-# fromLocation = os.getcwd() + r"/flask/H2GTRM.TTF"
+import matplotlib
+matplotlib.use('agg')
+
 fromLocation = os.getcwd() + r"/H2GTRM.TTF" 
 fontName = font_manager.FontProperties(fname=fromLocation).get_name()
 matplotlib.rc('font', family=fontName)
@@ -12,7 +14,7 @@ class ChangeFind:
     targetDate = list()
     def __init__(self, addrData):
         self.addrData = addrData
-        fig = plt.figure(num="SearchTrend", figsize=(10, 6))
+        fig = plt.figure(num="SearchTrend", figsize=(8, 5))
         gs = fig.add_gridspec(2, 1)
 
         for plotNum in range(2):
@@ -52,4 +54,4 @@ class ChangeFind:
             plt.title(addrData[plotNum][0]['keyword'], fontsize=16, c='indigo', weight='bold')
         plt.tight_layout()
         fig.savefig(os.getcwd() + r'/static/trend.png')
-        # plt.show()
+        plt.clf()

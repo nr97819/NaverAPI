@@ -11,8 +11,8 @@ import os
 import matplotlib
 matplotlib.use('agg')
 
-
-def Main(resultKeyword): 
+def Main(resultKeyword):
+    plt.clf() 
     resultData = list()
     refinedInputList = []
     wc = list()
@@ -50,7 +50,7 @@ def Main(resultKeyword):
                 visualInfoList.append(targetDate[count]) # 기간(날짜)
                 refinedText = DataRefine.DataRefining2(directlyCrawledData, visualInfoList)
                 titleText.append(refinedText)
-                wc.append(CrawlVisual.WordData(refinedText))
+                wc.append(CrawlVisual.WordData(refinedText, count, titleText[count][0]))
                 count = count + 1
     wcNum = 0
     fig = plt.figure(figsize=(14, 12), facecolor="white")
@@ -60,10 +60,10 @@ def Main(resultKeyword):
         ax.set_title(titleText[wcNum - 1][0]['title'] +'  '+ titleText[wcNum - 1][0]['extremum'] +'\n'+ titleText[wcNum - 1][0]['date'], fontsize='10')
         ax.imshow(wcItems,interpolation='bilinear')
         ax.axis('off')
-    fig.tight_layout(pad=0)
+    # fig.tight_layout(pad=0)
     # plt.show()
     fig.savefig(os.getcwd() + r'/static/graph.png')
 
 if __name__ == '__main__':
-    # Main(['클라우드', 'cloud', '클라우드 보안', 'cloud security'])
-    Main()
+    Main(['클라우드', 'cloud', '클라우드 보안', 'cloud security'])
+    # Main()

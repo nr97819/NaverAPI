@@ -38,9 +38,13 @@
             </div>
 
             <div class="right">
-                <p><img src="{{ url_for('static', filename=welcome)}}", width="480"></p>
-                <p><img src="{{ url_for('static', filename=trend)}}", width="720"></p>
-                <p><img src="{{ url_for('static', filename=graph)}}", width="720"></p>
+                {% if welcome=='welcome.png' %}
+                <p><img src="{{ url_for('static', filename=welcome)}}"></p>
+                {% else %}           
+                <p><img src="{{ url_for('static', filename=trend)}}"></p>
+                <p><img src="{{ url_for('static', filename=word0)}}"><img src="{{ url_for('static', filename=word1)}}"><img src="{{ url_for('static', filename=word2)}}"><img src="{{ url_for('static', filename=word3)}}"></p>
+                <p><img src="{{ url_for('static', filename=word4)}}"><img src="{{ url_for('static', filename=word5)}}"><img src="{{ url_for('static', filename=word6)}}"><img src="{{ url_for('static', filename=word7)}}"></p>
+                {% endif %}
             </div>
         </div>
     </body>
