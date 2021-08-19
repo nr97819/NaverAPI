@@ -23,4 +23,7 @@ RUN pip install beautifulsoup4
 RUN pip install pandas
 RUN pip install openpyxl
 
+RUN cp /app/H2GTRM.TTF /usr/share/fonts/truetype
+RUN fc-cache -fv
+
 CMD ["uwsgi","uwsgi.ini"]
