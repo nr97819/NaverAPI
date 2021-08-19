@@ -40,13 +40,21 @@
                         <p><img src="{{ url_for('static', filename=trend)}}"></p>
                     </div>
                 </div>
-                <h1 style="color: rgb(70, 154, 233); display: block;">워드 클라우드</h2>
+                <h1 style="color: rgb(70, 154, 233); display: block;">Word Cloud</h2>
                 <div class="bottom" style="
                 border: 1px solid; 
                 padding: 10px;">
                     <div class="container">
-                        <div><img src="{{ url_for('static', filename=word0)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"><img src="{{ url_for('static', filename=word1)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"><img src="{{ url_for('static', filename=word4)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"><img src="{{ url_for('static', filename=word5)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"></div>
-                        <div><img src="{{ url_for('static', filename=word2)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"><img src="{{ url_for('static', filename=word3)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"><img src="{{ url_for('static', filename=word6)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"><img src="{{ url_for('static', filename=word7)}}", class='img-city', onmouseenter="zoomIn(event)", onmouseleave="zoomOut(event)"></div>
+                            <img src="{{ url_for('static', filename=word0)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word1)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word2)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word3)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                    </div>
+                    <div class="container">
+                            <img src="{{ url_for('static', filename=word4)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word5)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word6)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word7)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
                     </div>
                 </div>
                 {% endif %}
