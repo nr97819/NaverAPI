@@ -19,13 +19,16 @@
                     <p>비교할 검색어 2</p>
                     <p><input type="text" id='input2' name="keyword2" placeholder="ex. 클라우드 보안"></p>
                     <input type='button' onclick='input_Text()' value='샘플 키워드 입력'/>
-                    <input style="background-color:rgb(133, 235, 187);" type="submit" value="검색" >
+                    <input style="background-color:rgb(133, 235, 187);" type="submit" value="검색" onclick='newClickEvent()'>
                     <br>
                     <h3>Description</h3>
                     <p style="font-size:8">비교할 검색어 두 개를 입력받아</p>
                     <p style="font-size:8">시간에 따른 트렌드 변화 그래프와</p>
                     <p style="font-size:8">관심도 변화량에 따른 워드클라우드 출력.</p>
                 </form>
+            </div>
+            <div class="loading">
+                <img id="loading-image" src="{{ url_for('static', filename='LoadingSpin.gif')}}" alt="Loading..." hidden="true" />
             </div>
             <div class="right">
                 {% if welcome=='welcome.png' %}
