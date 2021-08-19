@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" 
+              content="width=device-width, height=device-height, 
+                         minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+        <title>Result Page</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    </head>
+    <body>
+        <script src="{{ url_for('static', filename='javascript/function.js') }}"></script>
+        <div>
+            <div class="left">
+                <form action="/" method="get">
+                    <h1>NaverAPI & NewsData</h1>
+                    <p>비교할 검색어 1</p>
+                    <p><b>{{keyword1}}</b></p>
+                    <p>비교할 검색어 2</p>
+                    <p><b>{{keyword2}}</b></p>
+                    <input style="background-color:rgb(133, 235, 187);" type="submit" value="다시 검색" >
+                </form>
+            </div>
+            <div class="right">
+                <!-- 결과 : 
+                    {{result}} <br>
+                 -->
+                <br>
+                <h2 style="color: blue; display: block;">트렌드 그래프</h2>
+                <div class="top" style="
+                border: 3px solid; 
+                padding: 10px;">
+                    <!-- <b> {{keyword1}} </b> -->
+                    <div class="container">
+                        {% if welcome=='welcome.png' %}
+                        {% else %}           
+                        <p><img src="{{ url_for('static', filename=trend)}}", width="720"></p>
+                        {% endif %}
+                    </div>
+                </div>
+                <br>
+                <h2 style="color: blue; display: block;">워드 클라우드</h2>
+                <div class="bottom" style="
+                border: 3px solid; 
+                padding: 10px;">
+                    <div class="container">
+                        {% if welcome=='welcome.png' %}
+                        {% else %}           
+                        <p><img src="{{ url_for('static', filename=graph)}}", width="720"></p>
+                        {% endif %}
+                    </div>
+                    <div class="container">
+                        {% if welcome=='welcome.png' %}
+                        {% else %}           
+                        
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
