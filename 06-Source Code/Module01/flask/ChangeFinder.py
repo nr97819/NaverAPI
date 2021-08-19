@@ -52,4 +52,5 @@ class ChangeFind:
             plt.title(addrData[plotNum][0]['keyword'], fontsize=16, c='indigo', weight='bold')
         plt.tight_layout()
         fig.savefig(os.getcwd() + r'/static/trend.png')
+        fig = plt.clf()
         # plt.show()

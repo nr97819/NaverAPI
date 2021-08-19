@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS,ImageColorGenerator
 import PIL.Image as pilimg
 import os
+import matplotlib
+matplotlib.use('agg')
 
 def Main(resultKeyword): 
     resultData = list()
