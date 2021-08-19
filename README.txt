@@ -1,4 +1,4 @@
-# 모듈1: Naver Search Trend API<h>
+# 모듈1: Naver Search Trend API
     # Python version: 3.8.10
     # imported library
         # Main : numpy, CrawlVisual, matplotlib, WordCloud, PIL
