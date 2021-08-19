@@ -9,7 +9,7 @@
         # ChangeFinder : matplotlib, numpy, ruptures
         # CrawlVisual : os, WordCloud, PIL, matplotlib, numpy
 
-# 모듈2: Naver Search Trend API + DockerCompose
+# 모듈2: Naver Search Trend API + Docker Compose
     # Python version : 3.8.10
     # Docker version : 20.10.7
     # Docker Compose version : 2.0.0-beta.6
