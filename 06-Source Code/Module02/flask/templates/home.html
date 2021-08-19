@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" 
+              content="width=device-width, height=device-height, 
+                         minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+        <title>NaverAPI & NewsData</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    </head>     
+    <body>
+        <script src="{{ url_for('static', filename='javascript/function.js') }}"></script>
+        <div>
+            <div class="left">
+                <form action="/" method="post">
+                    <h1>NaverAPI & NewsData</h1>
+                    <p>비교할 검색어 1</p>
+                    <p><input type="text" id='input1' name="keyword1" placeholder="ex. 클라우드"></p>
+                    <p>비교할 검색어 2</p>
+                    <p><input type="text" id='input2' name="keyword2" placeholder="ex. 클라우드 보안"></p>
+                    <input type='button' onclick='input_Text()' value='샘플 키워드 입력'/>
+                    <input style="background-color:rgb(133, 235, 187);" type="submit" value="검색" >
+                    <br>
+                    <h3>Description</h3>
+                    <p style="font-size:8">비교할 검색어 두 개를 입력받아</p>
+                    <p style="font-size:8">시간에 따른 트렌드 변화 그래프와</p>
+                    <p style="font-size:8">관심도 변화량에 따른 워드클라우드 출력.</p>
+                </form>
+            </div>
+            <div class="right">
+                {% if welcome=='welcome.png' %}
+                <p><img src="{{ url_for('static', filename=welcome)}}"></p>
+                <br>
+                {% else %}
+                <h1 style="color: rgb(70, 154, 233); display: block;">Trend Graph</h2>
+                <div class="top" style="
+                border: 1px solid; 
+                padding: 10px;">
+                    <div class="container">
+                        <p><img src="{{ url_for('static', filename=trend)}}"></p>
+                    </div>
+                </div>
+                <h1 style="color: rgb(70, 154, 233); display: block;">Word Cloud</h2>
+                <div class="bottom" style="
+                border: 1px solid; 
+                padding: 10px;">
+                    <div class="container">
+                            <img src="{{ url_for('static', filename=word0)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word1)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word2)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word3)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                    </div>
+                    <div class="container">
+                            <img src="{{ url_for('static', filename=word4)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word5)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word6)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                            <img src="{{ url_for('static', filename=word7)}}" class='img-city' onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
