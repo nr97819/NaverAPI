@@ -5,6 +5,9 @@ function input_Text(){
 
 function newClickEvent(){
     document.getElementById("loading-image").hidden = null;
+    // document.getElementById("welcome-image").hidden = true;
+    document.getElementById("rightDiv").style = "display:none";
+    document.getElementsByClassName("right").style = "display:none";
 }
 
 function zoomIn(event) {

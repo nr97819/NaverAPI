@@ -11,7 +11,7 @@
     <body>
         <script src="{{ url_for('static', filename='javascript/function.js') }}"></script>
         <div>
-            <div class="left">
+            <div id="leftDiv" class="left">
                 <form action="/" method="post">
                     <h1>NaverAPI & NewsData</h1>
                     <p>비교할 검색어 1</p>
@@ -30,9 +30,9 @@
             <div class="loading">
                 <img id="loading-image" src="{{ url_for('static', filename='LoadingSpin.gif')}}" alt="Loading..." hidden="true" />
             </div>
-            <div class="right">
+            <div id=rightDiv class="right">
                 {% if welcome=='welcome.png' %}
-                <p><img src="{{ url_for('static', filename=welcome)}}"></p>
+                <p><img id="welcome-image" src="{{ url_for('static', filename=welcome)}}"></p>
                 <br>
                 {% else %}
                 <h1 style="color: rgb(70, 154, 233); display: block;">Trend Graph</h2>
