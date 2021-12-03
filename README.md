@@ -66,7 +66,7 @@ To use the generator, look at [generator-standard-readme](https://github.com/Ric
 
 This project exists thanks to all the people who contribute. 
 <a href="https://github.com/RichardLitt/standard-readme/graphs/contributors"><img src="https://opencollective.com/standard-readme/contributors.svg?width=890&button=false" /></a>
-
+![image](https://user-images.githubusercontent.com/55518121/144660712-0a05fa2b-de57-4312-85f8-e0a64eecf4a6.png)
 
 ## License
 
