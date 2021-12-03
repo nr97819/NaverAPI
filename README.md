@@ -1,7 +1,5 @@
 # NaverAPI를 활용한 검색어 동향 추이 분석
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-
 본 프로젝트는 python 크롤링 학습 과정에서 제작되었습니다.
 
 본 레포지토리에 포함된 항목들:
@@ -60,8 +58,7 @@ docker-compose up -d --build
 
 ## License
 
-[MIT](LICENSE) © Richard Littauer
-
+[SK infosec Academy]
 
 # 모듈1: Naver Search Trend API
     # Python version : 3.8.10
