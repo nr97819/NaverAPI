@@ -19,16 +19,9 @@ Standard Readme is designed for open source libraries. Although it’s [historic
 
 ## 프로젝트 목차
 
-- [Background](#background)
-- [Install](#install)
-- [Usage](#usage)
-	- [Generator](#generator)
-- [Badge](#badge)
-- [Example Readmes](#example-readmes)
-- [Related Efforts](#related-efforts)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
+- [배경 내용](#background)
+- [실행 및 테스트 방법](#usage)
+- [결과물](#usage)
 
 ## 배경 설명
 
