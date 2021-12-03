@@ -1,12 +1,12 @@
-# Standard Readme
+# NaverAPI를 활용한 검색어 동향 추이 분석
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A standard style for README files
+본 프로젝트는 python 크롤링 학습 과정에서 제작되었습니다.
 
 Your README file is normally the first entry point to your code. It should tell people why they should use your module, how they can install it, and how they can use it. Standardizing how you write your README makes creating and maintaining your READMEs easier. Great documentation takes work!
 
-This repository contains:
+본 레포지토리에 포함된 항목들:
 
 1. [The specification](spec.md) for how a standard README should look.
 2. A link to [a linter](https://github.com/RichardLitt/standard-readme-preset) you can use to keep your README maintained ([work in progress](https://github.com/RichardLitt/standard-readme/issues/5)).
@@ -17,7 +17,7 @@ This repository contains:
 Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
 
 
-## Table of Contents
+## 프로젝트 목차
 
 - [Background](#background)
 - [Install](#install)
@@ -30,7 +30,7 @@ Standard Readme is designed for open source libraries. Although it’s [historic
 - [Contributing](#contributing)
 - [License](#license)
 
-## Background
+## 배경 설명
 
 Standard Readme started with the issue originally posed by [@maxogden](https://github.com/maxogden) over at [feross/standard](https://github.com/feross/standard) in [this issue](https://github.com/feross/standard/issues/141), about whether or not a tool to standardize readmes would be useful. A lot of that discussion ended up in [zcei's standard-readme](https://github.com/zcei/standard-readme/issues/1) repository. While working on maintaining the [IPFS](https://github.com/ipfs) repositories, I needed a way to standardize Readmes across that organization. This specification started as a result of that.
 
@@ -56,15 +56,7 @@ The goals for this repository are:
 4. A **generator** that can be used to quickly scaffold out new READMEs. See [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme).
 5. A **compliant badge** for users. See [the badge](#badge).
 
-## Install
-
-This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go check them out if you don't have them locally installed.
-
-```sh
-$ npm install --global standard-readme-spec
-```
-
-## Usage
+## 실행 및 테스트 방법
 
 This is only a documentation package. You can print out [spec.md](spec.md) to your console:
 
@@ -73,11 +65,11 @@ $ standard-readme-spec
 # Prints out the standard-readme spec
 ```
 
-### Generator
+### 생성자
 
 To use the generator, look at [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme). There is a global executable to run the generator in that package, aliased as `standard-readme`.
 
-## Badge
+## 배지
 
 If your README is compliant with Standard-Readme and you're on GitHub, it would be great if you could add the badge. This allows people to link back to this Spec, and helps adoption of the README. The badge is **not required**.
 
