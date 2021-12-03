@@ -54,8 +54,8 @@ docker-compose up -d --build
 
 ### 참여자들
 
-본 프로젝트에 참여한 조원들
-<a href="https://github.com/WonhaWoo/NaverAPI/graphs/contributors">
+본 프로젝트에 참여한 조원들<br/>
+<a href="https://github.com/WonhaWoo/NaverAPI/graphs/contributors"><br/>
 <img src="https://user-images.githubusercontent.com/55518121/144660712-0a05fa2b-de57-4312-85f8-e0a64eecf4a6.png" /></a>
 
 ## License
