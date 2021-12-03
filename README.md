@@ -54,8 +54,8 @@ The goals for this repository are:
 This is only a documentation package. You can print out [spec.md](spec.md) to your console:
 
 ```sh
-$ standard-readme-spec
-# Prints out the standard-readme spec
+cd NaverAPI\06-Source Code\Module02\docker-compose.yml
+docker-compose up -d --build
 ```
 
 ### 결과물
