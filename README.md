@@ -4,18 +4,7 @@
 
 본 프로젝트는 python 크롤링 학습 과정에서 제작되었습니다.
 
-Your README file is normally the first entry point to your code. It should tell people why they should use your module, how they can install it, and how they can use it. Standardizing how you write your README makes creating and maintaining your READMEs easier. Great documentation takes work!
-
 본 레포지토리에 포함된 항목들:
-
-1. [The specification](spec.md) for how a standard README should look.
-2. A link to [a linter](https://github.com/RichardLitt/standard-readme-preset) you can use to keep your README maintained ([work in progress](https://github.com/RichardLitt/standard-readme/issues/5)).
-3. A link to [a generator](https://github.com/RichardLitt/generator-standard-readme) you can use to create standard READMEs.
-4. [A badge](#badge) to point to this spec.
-5. [Examples of standard READMEs](example-readmes/) - such as this file you are reading.
-
-Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
-
 
 ## 프로젝트 목차
 
@@ -25,29 +14,30 @@ Standard Readme is designed for open source libraries. Although it’s [historic
 
 ## 배경 설명
 
-Standard Readme started with the issue originally posed by [@maxogden](https://github.com/maxogden) over at [feross/standard](https://github.com/feross/standard) in [this issue](https://github.com/feross/standard/issues/141), about whether or not a tool to standardize readmes would be useful. A lot of that discussion ended up in [zcei's standard-readme](https://github.com/zcei/standard-readme/issues/1) repository. While working on maintaining the [IPFS](https://github.com/ipfs) repositories, I needed a way to standardize Readmes across that organization. This specification started as a result of that.
+> 프로젝트 선정 배경
 
-> Your documentation is complete when someone can use your module without ever
-having to look at its code. This is very important. This makes it possible for
-you to separate your module's documented interface from its internal
-implementation (guts). This is good because it means that you are free to
-change the module's internals as long as the interface remains the same.
+네이버 통합 검색어 트렌드 기준 2020년 11월 초 클라우드에 대한 관심이 급증함
+ 
+하지만 클라우드 보안에 관한 관심은 2019년 2월 경, 클라우드에 관한 관심이 저점일 때 가장 높았음
 
-> Remember: the documentation, not the code, defines what a module does.
+상관관계를 분석하여 클라우드 보안 컨설팅 / 마케팅에 유의미한 데이터로 활용하고자 주제를 선정함.
 
-~ [Ken Williams, Perl Hackers](http://mathforum.org/ken/perl_modules.html#document)
+> 프로젝트 목적
 
-Writing READMEs is way too hard, and keeping them maintained is difficult. By offloading this process - making writing easier, making editing easier, making it clear whether or not an edit is up to spec or not - you can spend less time worrying about whether or not your initial documentation is good, and spend more time writing and using code.
+<클라우드>, <클라우드 보안> 각 키워드의 트렌드를 조사하고 급증/급감 시 전후 1개월간 뉴스 데이터를 수집한 후, 
+각 뉴스의 제목, 본문에 어떤 키워드들이 어떤 빈도로 언급되었는지 추출하여 시각화 한다.
 
-By having a standard, users can spend less time searching for the information they want. They can also build tools to gather search terms from descriptions, to automatically run example code, to check licensing, and so on.
+- Python(BeautifulSoup)을 통해 Naver API 통합 검색어 트렌드, 관심 급증/급감 구간 뉴스 데이터를 추출한다.
+- 클라우드, 클라우드 보안 각각의 트렌드 데이터를 날짜별로 정제, 구간별 뉴스 데이터를 단어별로 정제한다.
+- Pandas를 활용하여 정제된 트렌드 데이터를 그래프로 나타내고 뉴스 키워드를 Word Cloud로 시각화한다.
+- 클라우드, 클라우드 보안에 대한 관심이 급증/급감할 시점에 자주 등장한 키워드를 분류하여 보관한다.
+- 향후 뉴스에 해당 키워드가 등장할 경우 실제로 트렌드 변화가 있는지 확인하고 모델을 수정한다.
 
-The goals for this repository are:
-
-1. A well defined **specification**. This can be found in the [Spec document](spec.md). It is a constant work in progress; please open issues to discuss changes.
-2. **An example README**. This Readme is fully standard-readme compliant, and there are more examples in the `example-readmes` folder.
-3. A **linter** that can be used to look at errors in a given Readme. Please refer to the [tracking issue](https://github.com/RichardLitt/standard-readme/issues/5).
-4. A **generator** that can be used to quickly scaffold out new READMEs. See [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme).
-5. A **compliant badge** for users. See [the badge](#badge).
+1. NaverAPI 검색어 트렌드 그래프와 검색어 워드 클라우드를 웹에서 확인할 수 있도록 구현하였다
+2. Docker + Docker 즉 Docker Compose를 사용하여 Web, Was 각각의 컨테이너를 빌드하였다. Web은 nginx 1.17.4를, Was는 flask를 사용해 구축하였으며 
+3. uWSGI를 Web, Was간 인터페이스로 선정하였다.
+4. Web컨테이너와 uWSGI는 지정된 포트로, uWSGI와 Was는 소켓 통신한다.
+5. UI/UX를 향상시키기 위해 CSS, Javascript를 사용하였다. (상세한 건 다음 페이지에서 직접 보면서 알아보자)
 
 ## 실행 및 테스트 방법
 
