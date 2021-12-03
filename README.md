@@ -50,7 +50,7 @@ docker-compose up -d --build
 
 ### 결과물
 
-To use the generator, look at [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme). There is a global executable to run the generator in that package, aliased as `standard-readme`.
+<a href="https://github.com/nr97819/NaverAPI/blob/main/07-%EA%B2%B0%EA%B3%BC%EB%AC%BC/Module02/Module02_result.pdf" /></a>
 
 ### 참여자들
 
