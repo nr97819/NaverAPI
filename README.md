@@ -45,7 +45,7 @@ EC2 인스턴스 구성
 ```sh
 git init
 git remote add origin https://github.com/nr97819/NaverAPI.git
-git pull origin healers_test
+git pull origin main
 
 cd 06-Source Code/Module02/docker-compose.yml
 docker-compose up -d --build
