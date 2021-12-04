@@ -39,7 +39,7 @@
 
 ## 실행 및 테스트 방법
 
-This is only a documentation package. You can print out [spec.md](spec.md) to your console:
+아래 디렉토리로 이동 후, 도커 컴포즈 실행
 
 ```sh
 cd NaverAPI\06-Source Code\Module02\docker-compose.yml
