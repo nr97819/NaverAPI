@@ -92,20 +92,6 @@ docker-compose up -d --build
 
 ### 결과물
 
-<a href="" />프로젝트 결과물 캡처 파일</a>
-
-### 참여자들
-
-본 프로젝트에 참여한 조원들<br/>
-<a href="https://github.com/WonhaWoo/NaverAPI/graphs/contributors"><br/>
-<img src="https://user-images.githubusercontent.com/55518121/144660712-0a05fa2b-de57-4312-85f8-e0a64eecf4a6.png" /></a>
-
-## License
-
-[SK infosec Academy]
-
-### 결과물
-
 <a href="https://github.com/nr97819/NaverAPI/blob/main/07-%EA%B2%B0%EA%B3%BC%EB%AC%BC/Module02/Module02_result.pdf" />프로젝트 결과물 캡처 파일</a>
 
 ### 참여자들
