@@ -104,19 +104,6 @@ docker-compose up -d --build
 
 [SK infosec Academy]
 
-# 최종 프로젝트: Nginx + Flask (Docker Compose)
-    # Python version : 3.9
-    # Docker version : 20.10.7
-    # Docker Compose version : 2.0.0-beta.6
-    # imported library
-        # Main : (import)
-        # Scan :
-        # 작성중
-
-cd NaverAPI\06-Source Code\Module02\docker-compose.yml
-docker-compose up -d --build
-```
-
 ### 결과물
 
 <a href="https://github.com/nr97819/NaverAPI/blob/main/07-%EA%B2%B0%EA%B3%BC%EB%AC%BC/Module02/Module02_result.pdf" />프로젝트 결과물 캡처 파일</a>
